@@ -1,0 +1,3156 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بانک پرامپت سازمانی - شرکت بانیان صنعت پرشین</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: rgb(170, 180, 250);
+    --glass: rgba(255,255,255,0.45);
+    --glass-border: rgba(255,255,255,0.7);
+    --glass-shadow: rgba(120,130,220,0.18);
+    --accent: #4f5ecf;
+    --accent2: #7c8ef5;
+    --text: #1e2060;
+    --text-light: #4a4f8a;
+    --danger: #e74c6e;
+    --success: #3dd6a3;
+    --warn: #f5a623;
+    --radius: 20px;
+    --radius-sm: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    color: var(--text);
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Animated background blobs */
+  body::before, body::after {
+    content: '';
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    pointer-events: none;
+  }
+  body::before {
+    width: 500px; height: 500px;
+    background: rgba(255,255,255,0.3);
+    top: -100px; right: -100px;
+    animation: blobMove1 12s ease-in-out infinite alternate;
+  }
+  body::after {
+    width: 400px; height: 400px;
+    background: rgba(100,120,255,0.2);
+    bottom: -80px; left: -80px;
+    animation: blobMove2 15s ease-in-out infinite alternate;
+  }
+  @keyframes blobMove1 { 0%{transform:translate(0,0) scale(1);} 100%{transform:translate(40px,60px) scale(1.1);} }
+  @keyframes blobMove2 { 0%{transform:translate(0,0) scale(1);} 100%{transform:translate(-30px,-50px) scale(1.15);} }
+
+  /* HEADER */
+  header {
+    position: relative; z-index: 10;
+    padding: 28px 40px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(255,255,255,0.3);
+    backdrop-filter: blur(18px);
+    border-bottom: 1.5px solid var(--glass-border);
+    box-shadow: 0 4px 32px rgba(80,90,200,0.08);
+  }
+  .header-brand { display: flex; align-items: center; gap: 18px; }
+  .logo-wrap {
+    width: 72px; height: 72px; border-radius: 18px;
+    background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(80,90,200,0.12);
+  }
+  .logo-wrap img { width: 100%; height: 100%; object-fit: contain; background: transparent; }
+  .logo-placeholder {
+    width: 72px; height: 72px; border-radius: 18px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; color: #fff; font-weight: 800;
+    box-shadow: 0 4px 18px rgba(80,90,200,0.25);
+  }
+  .header-title h1 {
+    font-size: 1.55rem; font-weight: 800; color: var(--text);
+    letter-spacing: -0.5px;
+  }
+  .header-title p {
+    font-size: 0.88rem; color: var(--text-light); font-weight: 500; margin-top: 2px;
+  }
+  .header-badge {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff; border-radius: 50px; padding: 8px 22px;
+    font-size: 0.82rem; font-weight: 600;
+    box-shadow: 0 4px 18px rgba(80,90,200,0.22);
+  }
+
+  /* MAIN */
+  main { position: relative; z-index: 5; padding: 40px 36px 60px; }
+
+  /* SECTION GRID */
+  .sections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  /* UNIT CARD */
+  .unit-card {
+    background: var(--glass);
+    backdrop-filter: blur(22px);
+    border: 1.5px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 36px var(--glass-shadow);
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+    position: relative;
+  }
+  .unit-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(80,90,200,0.18);
+  }
+  .unit-card-header {
+    padding: 22px 24px 18px;
+    display: flex; align-items: center; gap: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.4);
+  }
+  .unit-icon {
+    width: 48px; height: 48px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .unit-card-info h2 { font-size: 1.05rem; font-weight: 700; color: var(--text); }
+  .unit-card-info p { font-size: 0.8rem; color: var(--text-light); margin-top: 3px; }
+  .unit-card-footer {
+    padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .prompt-count {
+    font-size: 0.8rem; font-weight: 600; color: var(--text-light);
+    background: rgba(80,90,200,0.1); border-radius: 50px; padding: 4px 12px;
+  }
+  .lock-icon { font-size: 18px; opacity: 0.55; }
+  .public-badge {
+    font-size: 0.75rem; font-weight: 600; color: var(--success);
+    background: rgba(61,214,163,0.12); border-radius: 50px; padding: 4px 12px;
+  }
+  .unlock-btn {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff; border: none; border-radius: 50px;
+    padding: 7px 18px; font-size: 0.8rem; font-weight: 600;
+    cursor: pointer; font-family: 'Vazirmatn', sans-serif;
+    box-shadow: 0 3px 12px rgba(80,90,200,0.22);
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .unlock-btn:hover { opacity: 0.88; transform: scale(1.04); }
+
+  /* MODAL OVERLAY */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(20,25,80,0.35);
+    backdrop-filter: blur(10px);
+    z-index: 100; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .modal-overlay.active { display: flex; }
+
+  /* PASSWORD MODAL */
+  .password-modal {
+    background: rgba(255,255,255,0.75);
+    backdrop-filter: blur(30px);
+    border: 1.5px solid var(--glass-border);
+    border-radius: 28px;
+    padding: 44px 44px 36px;
+    width: 100%; max-width: 420px;
+    box-shadow: 0 24px 80px rgba(60,70,200,0.18);
+    text-align: center;
+    animation: modalIn 0.3s cubic-bezier(.34,1.56,.64,1);
+  }
+  @keyframes modalIn { from{transform:scale(0.88) translateY(20px);opacity:0;} to{transform:scale(1);opacity:1;} }
+  .password-modal .modal-icon { font-size: 44px; margin-bottom: 14px; }
+  .password-modal h3 { font-size: 1.2rem; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+  .password-modal p { font-size: 0.85rem; color: var(--text-light); margin-bottom: 26px; }
+  .pw-input-wrap { position: relative; margin-bottom: 16px; }
+  .pw-input-wrap input {
+    width: 100%; padding: 14px 48px 14px 18px;
+    border: 2px solid rgba(80,90,200,0.18);
+    border-radius: var(--radius-sm);
+    background: rgba(255,255,255,0.7);
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 1rem; color: var(--text);
+    outline: none; transition: border-color 0.2s;
+    direction: ltr; text-align: center; letter-spacing: 4px;
+  }
+  .pw-input-wrap input:focus { border-color: var(--accent); }
+  .pw-toggle {
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    cursor: pointer; font-size: 18px; opacity: 0.5;
+  }
+  .pw-error { color: var(--danger); font-size: 0.82rem; margin-bottom: 12px; display: none; }
+  .pw-error.show { display: block; }
+  .modal-btns { display: flex; gap: 10px; }
+  .btn-primary {
+    flex: 1; padding: 13px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff; border: none; border-radius: var(--radius-sm);
+    font-family: 'Vazirmatn', sans-serif; font-size: 0.95rem; font-weight: 700;
+    cursor: pointer; transition: opacity 0.2s;
+  }
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-secondary {
+    padding: 13px 20px;
+    background: rgba(80,90,200,0.08);
+    color: var(--text-light); border: 1.5px solid rgba(80,90,200,0.15);
+    border-radius: var(--radius-sm);
+    font-family: 'Vazirmatn', sans-serif; font-size: 0.95rem; font-weight: 600;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .btn-secondary:hover { background: rgba(80,90,200,0.15); }
+
+  /* UNIT DETAIL MODAL */
+  .unit-detail-modal {
+    background: rgba(240,243,255,0.92);
+    backdrop-filter: blur(30px);
+    border: 1.5px solid var(--glass-border);
+    border-radius: 28px;
+    width: 100%; max-width: 860px;
+    max-height: 90vh;
+    box-shadow: 0 24px 80px rgba(60,70,200,0.18);
+    display: flex; flex-direction: column;
+    animation: modalIn 0.3s cubic-bezier(.34,1.56,.64,1);
+    overflow: hidden;
+  }
+  .detail-header {
+    padding: 26px 32px 20px;
+    border-bottom: 1.5px solid rgba(255,255,255,0.6);
+    display: flex; align-items: center; gap: 14px;
+    background: rgba(255,255,255,0.4);
+    flex-shrink: 0;
+  }
+  .detail-header .unit-icon { width: 50px; height: 50px; font-size: 24px; }
+  .detail-header-info { flex: 1; }
+  .detail-header-info h2 { font-size: 1.15rem; font-weight: 800; color: var(--text); }
+  .detail-header-info p { font-size: 0.82rem; color: var(--text-light); margin-top: 3px; }
+  .close-btn {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.8);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 18px; color: var(--text-light);
+    transition: background 0.2s;
+  }
+  .close-btn:hover { background: rgba(255,255,255,0.9); }
+
+  /* PROMPTS LIST */
+  .prompts-scroll { overflow-y: auto; flex: 1; padding: 24px 32px; }
+  .prompt-item {
+    background: rgba(255,255,255,0.65);
+    border: 1.5px solid var(--glass-border);
+    border-radius: 18px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .prompt-item:hover { box-shadow: 0 8px 28px rgba(80,90,200,0.1); }
+  .prompt-item-header {
+    padding: 16px 20px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .prompt-item-header.expanded { border-color: rgba(255,255,255,0.6); }
+  .prompt-num {
+    width: 30px; height: 30px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff; font-size: 0.78rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .prompt-title { flex: 1; font-size: 0.95rem; font-weight: 700; color: var(--text); }
+  .chevron { font-size: 14px; color: var(--text-light); transition: transform 0.25s; }
+  .chevron.open { transform: rotate(180deg); }
+
+  .prompt-body { display: none; padding: 18px 20px 20px; }
+  .prompt-body.show { display: block; }
+  .prompt-text {
+    background: rgba(240,243,255,0.8);
+    border: 1px solid rgba(200,210,255,0.5);
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-size: 0.82rem; line-height: 2; color: var(--text);
+    white-space: pre-wrap; direction: rtl; text-align: right;
+    max-height: 340px; overflow-y: auto;
+    font-family: 'Vazirmatn', sans-serif;
+  }
+  .copy-btn {
+    margin-top: 12px;
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff; border: none; border-radius: 10px;
+    font-family: 'Vazirmatn', sans-serif; font-size: 0.85rem; font-weight: 600;
+    cursor: pointer; transition: opacity 0.2s, transform 0.15s;
+    box-shadow: 0 4px 14px rgba(80,90,200,0.22);
+  }
+  .copy-btn:hover { opacity: 0.88; transform: scale(1.03); }
+  .copy-btn.copied {
+    background: linear-gradient(135deg, var(--success), #2abc8a);
+  }
+
+  /* ADMIN PANEL */
+  .admin-section {
+    background: var(--glass);
+    backdrop-filter: blur(22px);
+    border: 1.5px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 36px var(--glass-shadow);
+    padding: 30px 32px;
+    margin-bottom: 28px;
+  }
+  .admin-section h2 {
+    font-size: 1.1rem; font-weight: 800; color: var(--text);
+    margin-bottom: 6px; display: flex; align-items: center; gap: 10px;
+  }
+  .admin-section p { font-size: 0.83rem; color: var(--text-light); margin-bottom: 22px; }
+  .admin-form { display: flex; flex-direction: column; gap: 14px; }
+  .form-row { display: flex; gap: 12px; flex-wrap: wrap; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 180px; }
+  .form-group label { font-size: 0.82rem; font-weight: 600; color: var(--text-light); }
+  .form-group input, .form-group select, .form-group textarea {
+    padding: 11px 14px;
+    border: 2px solid rgba(80,90,200,0.15);
+    border-radius: var(--radius-sm);
+    background: rgba(255,255,255,0.65);
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 0.88rem; color: var(--text);
+    outline: none; transition: border-color 0.2s;
+    direction: rtl;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); }
+  .form-group textarea { min-height: 120px; resize: vertical; line-height: 1.8; }
+  .btn-add {
+    align-self: flex-start;
+    padding: 12px 28px;
+    background: linear-gradient(135deg, var(--success), #2abc8a);
+    color: #fff; border: none; border-radius: var(--radius-sm);
+    font-family: 'Vazirmatn', sans-serif; font-size: 0.9rem; font-weight: 700;
+    cursor: pointer; transition: opacity 0.2s;
+    box-shadow: 0 4px 14px rgba(61,214,163,0.25);
+  }
+  .btn-add:hover { opacity: 0.88; }
+
+  .admin-success {
+    background: rgba(61,214,163,0.15); color: #1a8a6a;
+    border: 1px solid rgba(61,214,163,0.4);
+    border-radius: 10px; padding: 12px 18px;
+    font-size: 0.85rem; font-weight: 600;
+    display: none; margin-top: 10px;
+  }
+  .admin-success.show { display: block; }
+
+  /* Manage prompts - delete */
+  .manage-list { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+  .manage-item {
+    background: rgba(255,255,255,0.6);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .manage-item-title { flex: 1; font-size: 0.85rem; font-weight: 600; color: var(--text); }
+  .manage-item-unit { font-size: 0.75rem; color: var(--text-light); background: rgba(80,90,200,0.08); border-radius: 50px; padding: 3px 10px; }
+  .btn-delete {
+    padding: 6px 14px;
+    background: rgba(231,76,110,0.1); color: var(--danger);
+    border: 1px solid rgba(231,76,110,0.25);
+    border-radius: 8px; font-family: 'Vazirmatn', sans-serif;
+    font-size: 0.78rem; font-weight: 600; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-delete:hover { background: rgba(231,76,110,0.2); }
+
+  /* Section title */
+  .section-title {
+    font-size: 1.3rem; font-weight: 800; color: var(--text);
+    margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+  }
+  .section-title::after {
+    content: ''; flex: 1; height: 2px;
+    background: linear-gradient(to left, transparent, rgba(80,90,200,0.2));
+  }
+
+  /* Admin toggle button */
+  .admin-toggle-wrap {
+    text-align: center; margin-bottom: 24px;
+  }
+  .admin-toggle-btn {
+    padding: 10px 28px;
+    background: rgba(255,255,255,0.45);
+    backdrop-filter: blur(10px);
+    border: 1.5px solid var(--glass-border);
+    border-radius: 50px; color: var(--text-light);
+    font-family: 'Vazirmatn', sans-serif; font-size: 0.85rem; font-weight: 600;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .admin-toggle-btn:hover { background: rgba(255,255,255,0.7); }
+
+  .admin-panel { display: none; }
+  .admin-panel.open { display: block; }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(80,90,200,0.2); border-radius: 10px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(80,90,200,0.35); }
+
+  /* Toast */
+  .toast {
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(80px);
+    background: rgba(30,32,96,0.92); color: #fff;
+    padding: 12px 28px; border-radius: 50px;
+    font-size: 0.88rem; font-weight: 600;
+    z-index: 9999; transition: transform 0.3s, opacity 0.3s;
+    opacity: 0; pointer-events: none;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+  @media (max-width: 600px) {
+    header { padding: 18px 20px; }
+    main { padding: 24px 16px 48px; }
+    .sections-grid { grid-template-columns: 1fr; }
+    .unit-detail-modal { border-radius: 20px; max-height: 95vh; }
+    .detail-header, .prompts-scroll { padding-right: 18px; padding-left: 18px; }
+    .password-modal { padding: 32px 24px 28px; }
+  }
+
+  /* DateTime badge */
+  .header-right { display: flex; align-items: center; gap: 14px; flex-direction: column; align-items: flex-end; }
+  .datetime-display {
+    font-size: 0.75rem; color: var(--text-light); font-weight: 500;
+    background: rgba(255,255,255,0.4); border-radius: 50px;
+    padding: 5px 14px; border: 1px solid rgba(255,255,255,0.6);
+    letter-spacing: 0.02em;
+  }
+
+  /* Admin code modal */
+  .admin-code-modal {
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(30px);
+    border: 1.5px solid var(--glass-border);
+    border-radius: 28px;
+    padding: 44px 44px 36px;
+    width: 100%; max-width: 420px;
+    box-shadow: 0 24px 80px rgba(60,70,200,0.22);
+    text-align: center;
+    animation: modalIn 0.3s cubic-bezier(.34,1.56,.64,1);
+  }
+  .admin-code-modal .modal-icon { font-size: 44px; margin-bottom: 14px; }
+  .admin-code-modal h3 { font-size: 1.2rem; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+  .admin-code-modal p { font-size: 0.85rem; color: var(--text-light); margin-bottom: 26px; }
+
+  /* ChatGPT box */
+  
+
+
+
+  /* Floating particles */
+  .particle {
+    position: fixed; pointer-events: none; border-radius: 50%;
+    animation: floatUp linear infinite; opacity: 0; z-index: 0;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0.6; }
+    100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+  }
+
+
+  /* Hero banner */
+  .hero-banner {
+    position: relative; width: 100%; height: 200px; overflow: hidden;
+    flex-shrink: 0;
+  }
+  .hero-banner img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
+    display: block;
+  }
+  .hero-banner-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(20,25,80,0.08) 0%, rgba(20,25,80,0.28) 100%);
+    display: flex; align-items: center; justify-content: center; flex-direction: column;
+    gap: 6px;
+  }
+  .hero-banner-title {
+    color: #fff; font-size: clamp(1.2rem, 3vw, 1.9rem); font-weight: 800;
+    letter-spacing: -0.02em; text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  }
+  .hero-banner-sub {
+    color: rgba(255,255,255,0.8); font-size: 0.82rem; font-weight: 400;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+  }
+
+  /* Usage guide box */
+  .usage-guide {
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(18px);
+    border: 1.5px solid var(--glass-border);
+    border-radius: var(--radius);
+    box-shadow: 0 8px 36px var(--glass-shadow);
+    padding: 22px 28px;
+    margin-bottom: 28px;
+  }
+  .usage-guide-header {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+  }
+  .usage-guide-header h3 { font-size: 1rem; font-weight: 800; color: var(--text); }
+  .usage-steps { display: flex; flex-direction: column; gap: 10px; }
+  .usage-step {
+    display: flex; align-items: flex-start; gap: 12px;
+    font-size: 0.82rem; color: var(--text-light); line-height: 1.7;
+  }
+  .step-num {
+    width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff; font-size: 0.7rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .usage-divider { height: 1px; background: rgba(80,90,200,0.12); margin: 14px 0; }
+  .usage-contact {
+    display: flex; align-items: center; gap: 10px;
+    background: rgba(79,94,207,0.07);
+    border: 1px solid rgba(79,94,207,0.18);
+    border-radius: 10px; padding: 12px 16px;
+    font-size: 0.82rem; color: var(--text-light); line-height: 1.7;
+  }
+  .usage-contact strong { color: var(--text); }
+
+  /* Card blink/pulse on scroll */
+  @keyframes cardPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(255,140,0,0.6), 0 8px 36px var(--glass-shadow); background: rgba(255,255,255,0.65); }
+    25%  { box-shadow: 0 0 0 8px rgba(255,140,0,0.35), 0 16px 48px rgba(255,140,0,0.2); background: rgba(255,235,200,0.75); }
+    50%  { box-shadow: 0 0 0 0 rgba(255,140,0,0), 0 8px 36px var(--glass-shadow); background: rgba(255,255,255,0.65); }
+    75%  { box-shadow: 0 0 0 8px rgba(255,140,0,0.25), 0 16px 48px rgba(255,140,0,0.15); background: rgba(255,235,200,0.65); }
+    100% { box-shadow: 0 0 0 0 rgba(255,140,0,0), 0 8px 36px var(--glass-shadow); background: rgba(255,255,255,0.45); }
+  }
+  .unit-card.blink-highlight {
+    animation: cardPulse 1.2s ease-in-out;
+    transform: translateY(-4px);
+  }
+
+
+  /* ─── SETTINGS PANEL ─── */
+  .settings-fab {
+    position: fixed; bottom: 24px; left: 24px; z-index: 300;
+    width: 54px; height: 54px; border-radius: 50%;
+    background: linear-gradient(135deg, #1e2060, #4f5ecf);
+    border: 2px solid rgba(255,255,255,0.3);
+    color: #fff; font-size: 1.3rem; cursor: pointer;
+    box-shadow: 0 6px 24px rgba(30,32,96,0.4);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .settings-fab:hover { transform: rotate(70deg) scale(1.1); box-shadow: 0 10px 32px rgba(30,32,96,0.55); }
+
+  .settings-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(10,12,50,0.6); z-index: 290;
+    backdrop-filter: blur(4px);
+  }
+  .settings-overlay.open { display: block; }
+
+  .settings-drawer {
+    position: fixed; top: 0; left: -440px; width: 420px; height: 100vh;
+    background: rgba(255,255,255,0.96); z-index: 291; overflow-y: auto;
+    transition: left 0.35s cubic-bezier(.34,1.06,.64,1);
+    box-shadow: 6px 0 40px rgba(30,32,96,0.18);
+    padding: 0 0 40px;
+  }
+  .settings-drawer.open { left: 0; }
+
+  .settings-head {
+    position: sticky; top: 0; z-index: 2;
+    background: linear-gradient(135deg, #1e2060, #4f5ecf);
+    color: #fff; padding: 20px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .settings-head h3 { font-size: 1rem; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+  .settings-close {
+    background: rgba(255,255,255,0.2); border: none; color: #fff;
+    width: 30px; height: 30px; border-radius: 50%; cursor: pointer;
+    font-size: 1rem; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .settings-close:hover { background: rgba(255,255,255,0.35); }
+
+  .settings-tabs {
+    display: flex; border-bottom: 2px solid rgba(79,94,207,0.12); padding: 0 16px;
+    gap: 0; position: sticky; top: 60px; z-index: 1; background: #fff;
+  }
+  .stab {
+    padding: 10px 14px; font-size: 0.75rem; font-weight: 600;
+    color: var(--text-light); border: none; background: none;
+    cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px;
+    font-family: 'Vazirmatn', sans-serif; transition: all 0.2s; white-space: nowrap;
+  }
+  .stab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .settings-body { padding: 20px 24px; }
+  .sgroup { margin-bottom: 20px; }
+  .sgroup-title {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--text-light);
+    margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+  }
+  .sgroup-title::after { content: ''; flex: 1; height: 1px; background: rgba(79,94,207,0.12); }
+  .srow { margin-bottom: 12px; }
+  .srow label { font-size: 0.75rem; font-weight: 600; color: var(--text-light); display: block; margin-bottom: 5px; }
+  .srow input[type=text], .srow input[type=password], .srow select {
+    width: 100%; padding: 9px 12px;
+    border: 1.5px solid rgba(79,94,207,0.2); border-radius: 9px;
+    font-family: 'Vazirmatn', sans-serif; font-size: 0.85rem; color: var(--text);
+    background: rgba(245,246,255,0.8); outline: none; transition: border-color 0.2s;
+    direction: rtl;
+  }
+  .srow input:focus, .srow select:focus { border-color: var(--accent); }
+  .srow input[type=color] { width: 100%; height: 36px; border: none; border-radius: 8px; cursor: pointer; padding: 2px 4px; }
+  .srow input[type=range] { width: 100%; accent-color: var(--accent); }
+  .srow-inline { display: flex; gap: 8px; align-items: center; }
+  .srow-inline input[type=color] { width: 52px; flex-shrink: 0; height: 36px; }
+  .srow-inline input[type=text] { flex: 1; }
+
+  .sbtn {
+    width: 100%; padding: 10px; border-radius: 9px;
+    font-family: 'Vazirmatn', sans-serif; font-size: 0.85rem; font-weight: 700;
+    cursor: pointer; margin-bottom: 8px; border: none; transition: all 0.2s;
+  }
+  .sbtn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; }
+  .sbtn-primary:hover { opacity: 0.88; }
+  .sbtn-danger { background: rgba(231,76,110,0.1); color: var(--danger); border: 1.5px solid rgba(231,76,110,0.25); }
+  .sbtn-danger:hover { background: rgba(231,76,110,0.18); }
+  .sbtn-ghost { background: rgba(79,94,207,0.07); color: var(--accent); border: 1.5px solid rgba(79,94,207,0.2); }
+  .sbtn-ghost:hover { background: rgba(79,94,207,0.14); }
+
+  .unit-admin-list { display: flex; flex-direction: column; gap: 8px; }
+  .unit-admin-row {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(245,246,255,0.8); border: 1px solid rgba(79,94,207,0.12);
+    border-radius: 9px; padding: 8px 12px;
+  }
+  .unit-admin-row span { flex: 1; font-size: 0.82rem; }
+  .unit-lock-badge {
+    font-size: 0.65rem; padding: 2px 7px; border-radius: 20px;
+    background: rgba(79,94,207,0.1); color: var(--accent);
+  }
+  .settings-toast {
+    position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%);
+    background: var(--accent); color: #fff; padding: 10px 20px;
+    border-radius: 50px; font-size: 0.82rem; font-weight: 600;
+    z-index: 400; opacity: 0; pointer-events: none;
+    transition: opacity 0.3s; white-space: nowrap;
+  }
+  .settings-toast.show { opacity: 1; }
+
+  /* settings auth */
+  .settings-auth {
+    padding: 40px 24px; text-align: center;
+  }
+  .settings-auth-icon { font-size: 3rem; margin-bottom: 12px; }
+  .settings-auth h4 { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+  .settings-auth p { font-size: 0.82rem; color: var(--text-light); margin-bottom: 20px; }
+
+
+  /* ─── AI ASSISTANT ─── */
+  .ai-section {
+    background: var(--glass); backdrop-filter: blur(22px);
+    border: 1.5px solid var(--glass-border); border-radius: var(--radius);
+    box-shadow: 0 8px 36px var(--glass-shadow);
+    margin-bottom: 28px; overflow: hidden;
+  }
+  .ai-header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    padding: 18px 24px; display: flex; align-items: center; gap: 12px;
+  }
+  .ai-header-icon {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: linear-gradient(135deg, #e94560, #0f3460);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .ai-header h2 { font-size: 1rem; font-weight: 800; color: #fff; }
+  .ai-header p { font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-top: 2px; }
+  .ai-badge {
+    margin-right: auto; background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2); border-radius: 50px;
+    padding: 4px 12px; font-size: 0.7rem; color: rgba(255,255,255,0.85); font-weight: 600;
+  }
+
+  .ai-body { padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 14px; }
+
+  .ai-prompt-bar {
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .ai-prompt-bar select {
+    flex: 1; min-width: 200px; padding: 10px 14px;
+    border: 1.5px solid rgba(79,94,207,0.2); border-radius: 10px;
+    background: rgba(255,255,255,0.7); font-family: 'Vazirmatn', sans-serif;
+    font-size: 0.85rem; color: var(--text); outline: none; direction: rtl;
+    transition: border-color 0.2s;
+  }
+  .ai-prompt-bar select:focus { border-color: var(--accent); }
+  .ai-load-btn {
+    padding: 10px 18px; background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff; border: none; border-radius: 10px;
+    font-family: 'Vazirmatn', sans-serif; font-size: 0.85rem; font-weight: 600;
+    cursor: pointer; transition: opacity 0.2s; white-space: nowrap;
+  }
+  .ai-load-btn:hover { opacity: 0.88; }
+
+  .ai-chat {
+    background: rgba(255,255,255,0.55); border: 1.5px solid rgba(79,94,207,0.12);
+    border-radius: 14px; min-height: 220px; max-height: 400px;
+    overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px;
+  }
+  .ai-chat::-webkit-scrollbar { width: 4px; }
+  .ai-chat::-webkit-scrollbar-thumb { background: rgba(79,94,207,0.2); border-radius: 2px; }
+
+  .ai-msg { display: flex; gap: 10px; align-items: flex-start; animation: msgIn 0.25s ease; }
+  @keyframes msgIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+  .ai-msg.user { flex-direction: row-reverse; }
+  .ai-avatar {
+    width: 32px; height: 32px; border-radius: 10px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.8rem; font-weight: 700;
+  }
+  .ai-msg.user .ai-avatar { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; }
+  .ai-msg.bot .ai-avatar { background: linear-gradient(135deg, #1a1a2e, #0f3460); color: #fff; font-size: 1rem; }
+  .ai-bubble {
+    max-width: 82%; padding: 11px 15px; border-radius: 14px;
+    font-size: 0.84rem; line-height: 1.75; white-space: pre-wrap;
+    direction: rtl; text-align: right;
+  }
+  .ai-msg.user .ai-bubble {
+    background: linear-gradient(135deg, rgba(79,94,207,0.12), rgba(124,142,245,0.1));
+    border: 1px solid rgba(79,94,207,0.18);
+  }
+  .ai-msg.bot .ai-bubble {
+    background: rgba(255,255,255,0.85); border: 1px solid rgba(79,94,207,0.1);
+  }
+  .ai-typing { display: flex; gap: 5px; align-items: center; padding: 4px 2px; }
+  .ai-typing span {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+    animation: typingDot 1.2s infinite ease-in-out;
+  }
+  .ai-typing span:nth-child(2){animation-delay:.2s}
+  .ai-typing span:nth-child(3){animation-delay:.4s}
+  @keyframes typingDot{0%,80%,100%{transform:scale(0.7);opacity:0.4}40%{transform:scale(1);opacity:1}}
+
+  .ai-empty {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 8px;
+    padding: 24px; color: var(--text-light); text-align: center;
+  }
+  .ai-empty-icon { font-size: 2.5rem; opacity: 0.4; }
+  .ai-empty p { font-size: 0.82rem; line-height: 1.7; }
+
+  .ai-input-row { display: flex; gap: 8px; align-items: flex-end; }
+  .ai-input-row textarea {
+    flex: 1; padding: 14px 16px; min-height: 120px; max-height: 280px;
+    border: 1.5px solid rgba(79,94,207,0.2); border-radius: 10px;
+    background: rgba(255,255,255,0.7); font-family: 'Vazirmatn', sans-serif;
+    font-size: 0.85rem; color: var(--text); outline: none; resize: none;
+    transition: border-color 0.2s; direction: rtl; line-height: 1.6;
+  }
+  .ai-input-row textarea:focus { border-color: var(--accent); }
+  .ai-send-btn {
+    padding: 14px 22px; background: linear-gradient(135deg, #1a1a2e, #0f3460);
+    color: #fff; border: none; border-radius: 10px;
+    font-family: 'Vazirmatn', sans-serif; font-size: 0.9rem; font-weight: 700;
+    cursor: pointer; align-self: flex-end; transition: opacity 0.2s;
+    min-width: 70px;
+  }
+  .ai-send-btn:hover { opacity: 0.85; }
+  .ai-send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .ai-actions { display: flex; gap: 8px; }
+  .ai-clear-btn {
+    padding: 7px 14px; background: rgba(231,76,110,0.08);
+    border: 1px solid rgba(231,76,110,0.2); border-radius: 8px;
+    font-family: 'Vazirmatn', sans-serif; font-size: 0.78rem;
+    color: var(--danger); cursor: pointer; transition: all 0.2s;
+  }
+  .ai-clear-btn:hover { background: rgba(231,76,110,0.15); }
+
+</style>
+</head>
+<body>
+
+
+<!-- HERO BANNER -->
+<div class="hero-banner">
+  <img src="data:image/jpeg;base64,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" alt="Banian Sanat Persian Building" />
+  <div class="hero-banner-overlay">
+    <div class="hero-banner-title" style="display:flex;align-items:center;gap:14px"><img src="data:image/png;base64,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" alt="BSP" style="height:54px;width:auto;object-fit:contain;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.4))" /> شرکت بانیان صنعت پرشین</div>
+    <div class="hero-banner-sub">سامانه مدیریت پرامپت‌های سازمانی — واحد یادگیری و توسعه منابع انسانی</div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-brand">
+    
+    <div class="header-title">
+      <h1>بانک پرامپت سازمانی</h1>
+      <p>شرکت بانیان صنعت پرشین</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="header-badge">🤖 بانک پرامپت سازمانی</div>
+    <div class="datetime-display" id="datetimeDisplay">در حال بارگذاری...</div>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main>
+  <div class="section-title">واحدهای سازمانی</div>
+  <div class="sections-grid" id="sectionsGrid"></div>
+
+
+  <!-- USAGE GUIDE -->
+  <div class="usage-guide">
+    <div class="usage-guide-header">
+      <span style="font-size:1.3rem">📖</span>
+      <h3>راهنمای استفاده از بانک پرامپت سازمانی</h3>
+    </div>
+    <div class="usage-steps">
+      <div class="usage-step">
+        <div class="step-num">۱</div>
+        <span>از بین واحدهای سازمانی موردنظر را انتخاب کنید. واحدهای دارای قفل نیاز به رمز عبور دارند.</span>
+      </div>
+      <div class="usage-step">
+        <div class="step-num">۲</div>
+        <span>پرامپت موردنظر را باز کرده و محتوای آن را مطالعه کنید. قسمت‌های داخل <strong>[کروشه]</strong> را با اطلاعات واقعی جایگزین کنید.</span>
+      </div>
+      <div class="usage-step">
+        <div class="step-num">۳</div>
+        <span>دکمه <strong>«کپی پرامپت»</strong> را بزنید و متن را در ChatGPT، Claude یا هر ابزار هوش مصنوعی دیگری paste کنید.</span>
+      </div>
+      <div class="usage-step">
+        <div class="step-num">۴</div>
+        <span>برای استفاده مستقیم بدون کپی‌پیست، از <strong>دستیار هوش مصنوعی</strong> در همین صفحه استفاده کنید (نیاز به کلید API دارد).</span>
+      </div>
+    </div>
+    <div class="usage-divider"></div>
+    <div class="usage-contact">
+      <span style="font-size:1.4rem">📞</span>
+      <div>در صورت هرگونه سوال با <strong>واحد آموزش منابع انسانی</strong> — سرکار خانم <strong>زند پارسا</strong> به داخلی <strong>113</strong> تماس بگیرید.</div>
+    </div>
+  </div>
+
+  <!-- AI ASSISTANT -->
+  <div class="ai-section">
+    <div class="ai-header">
+      <div class="ai-header-icon">🤖</div>
+      <div>
+        <h2>دستیار هوش مصنوعی</h2>
+        <p>پرامپت انتخاب کنید و مستقیماً گفتگو کنید</p>
+      </div>
+      <div class="ai-badge">Groq AI ✦ رایگان و سریع</div>
+    </div>
+    <div class="ai-body">
+      <div class="ai-prompt-bar">
+        <select id="aiPromptSelect">
+          <option value="">— پرامپت از بانک انتخاب کنید —</option>
+        </select>
+        <button class="ai-load-btn" onclick="aiLoadPrompt()">📥 بارگذاری</button>
+      </div>
+      <div class="ai-chat" id="aiChat">
+        <div class="ai-empty" id="aiEmpty">
+          <div class="ai-empty-icon">💬</div>
+          <p>یک پرامپت انتخاب کنید یا مستقیماً سوال بنویسید.<br>دستیار هوشمند پاسخ می‌دهد.</p>
+        </div>
+      </div>
+      <div class="ai-input-row">
+        <textarea id="aiInput" placeholder="سوال یا دستور خود را بنویسید..." rows="5" onkeydown="aiHandleKey(event)"></textarea>
+        <button class="ai-send-btn" id="aiSendBtn" onclick="aiSend()">ارسال</button>
+      </div>
+      <div class="ai-actions">
+        <button class="ai-clear-btn" onclick="aiClear()">🗑 پاک کردن گفتگو</button>
+      </div>
+    </div>
+  </div>
+
+    <!-- ADMIN TOGGLE -->
+  <div class="admin-toggle-wrap">
+    <button class="admin-toggle-btn" onclick="toggleAdmin()">⚙️ مدیریت پرامپت‌ها (افزودن / حذف)</button>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <div class="admin-panel" id="adminPanel">
+    <!-- Add prompt -->
+    <div class="admin-section">
+      <h2>➕ افزودن پرامپت جدید</h2>
+      <p>برای افزودن پرامپت به یک واحد، اطلاعات زیر را وارد کنید.</p>
+      <div class="admin-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>واحد سازمانی</label>
+            <select id="addUnitSelect"></select>
+          </div>
+          <div class="form-group">
+            <label>عنوان پرامپت</label>
+            <input type="text" id="addPromptTitle" placeholder="مثلاً: تدوین شرح شغل">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>متن پرامپت</label>
+          <textarea id="addPromptText" placeholder="متن کامل پرامپت را اینجا وارد کنید..."></textarea>
+        </div>
+        <button class="btn-add" onclick="addPrompt()">✅ افزودن پرامپت</button>
+        <div class="admin-success" id="addSuccess">✅ پرامپت با موفقیت اضافه شد!</div>
+      </div>
+    </div>
+
+    <!-- Delete prompt -->
+    <div class="admin-section">
+      <h2>🗑️ حذف پرامپت</h2>
+      <p>برای حذف یک پرامپت از فهرست زیر، روی دکمه حذف کلیک کنید.</p>
+      <div class="form-group" style="max-width:300px">
+        <label>فیلتر بر اساس واحد</label>
+        <select id="deleteUnitFilter" onchange="renderManageList()"></select>
+      </div>
+      <div class="manage-list" id="manageList"></div>
+    </div>
+  </div>
+</main>
+
+<!-- ADMIN CODE MODAL -->
+<div class="modal-overlay" id="adminCodeModal">
+  <div class="admin-code-modal">
+    <div class="modal-icon">🔐</div>
+    <h3>ورود به پنل مدیریت</h3>
+    <p>برای دسترسی به بخش مدیریت پرامپت‌ها، کد مدیریتی را وارد کنید.</p>
+    <div class="pw-input-wrap">
+      <input type="password" id="adminCodeInput" placeholder="کد مدیریتی" onkeydown="if(event.key==='Enter') checkAdminCode()" />
+      <span class="pw-toggle" onclick="toggleAdminPw()">👁</span>
+    </div>
+    <div class="pw-error" id="adminCodeError">❌ کد اشتباه است. دوباره تلاش کنید.</div>
+    <div class="modal-btns">
+      <button class="btn-primary" onclick="checkAdminCode()">ورود</button>
+      <button class="btn-secondary" onclick="closeAdminCodeModal()">انصراف</button>
+    </div>
+  </div>
+</div>
+
+<!-- PASSWORD MODAL -->
+<div class="modal-overlay" id="passwordModal">
+  <div class="password-modal">
+    <div class="modal-icon">🔐</div>
+    <h3 id="pwModalTitle">ورود به واحد</h3>
+    <p id="pwModalSub">برای دسترسی به پرامپت‌های این واحد، رمز عبور را وارد کنید.</p>
+    <div class="pw-input-wrap">
+      <input type="password" id="pwInput" placeholder="رمز عبور" onkeydown="if(event.key==='Enter') checkPassword()">
+      <span class="pw-toggle" onclick="togglePw()">👁</span>
+    </div>
+    <div class="pw-error" id="pwError">❌ رمز عبور اشتباه است. دوباره تلاش کنید.</div>
+    <div class="modal-btns">
+      <button class="btn-primary" onclick="checkPassword()">ورود</button>
+      <button class="btn-secondary" onclick="closePasswordModal()">انصراف</button>
+    </div>
+  </div>
+</div>
+
+<!-- UNIT DETAIL MODAL -->
+<div class="modal-overlay" id="detailModal">
+  <div class="unit-detail-modal">
+    <div class="detail-header">
+      <div class="unit-icon" id="detailIcon"></div>
+      <div class="detail-header-info">
+        <h2 id="detailTitle"></h2>
+        <p id="detailSub"></p>
+      </div>
+      <div class="close-btn" onclick="closeDetailModal()">✕</div>
+    </div>
+    <div class="prompts-scroll" id="promptsList"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// =============================================
+// DATA
+// =============================================
+const UNITS = [
+  {
+    id: 'hr',
+    name: 'واحد منابع انسانی',
+    icon: '👥',
+    color: 'linear-gradient(135deg,#667eea,#764ba2)',
+    bg: 'rgba(102,126,234,0.12)',
+    password: 'hr1234',
+    isPublic: false,
+  },
+  {
+    id: 'sys',
+    name: 'واحد سیستم‌ها و روش‌ها',
+    icon: '⚙️',
+    color: 'linear-gradient(135deg,#f093fb,#f5576c)',
+    bg: 'rgba(240,100,220,0.12)',
+    password: 'sys1234',
+    isPublic: false,
+  },
+  {
+    id: 'pmo',
+    name: 'واحد مدیریت پروژه (PMO)',
+    icon: '📊',
+    color: 'linear-gradient(135deg,#4facfe,#00f2fe)',
+    bg: 'rgba(79,172,254,0.12)',
+    password: 'pmo1234',
+    isPublic: false,
+  },
+  {
+    id: 'fin',
+    name: 'واحد مالی و حسابداری',
+    icon: '💰',
+    color: 'linear-gradient(135deg,#43e97b,#38f9d7)',
+    bg: 'rgba(67,233,123,0.12)',
+    password: 'fin1234',
+    isPublic: false,
+  },
+  {
+    id: 'letters',
+    name: 'نامه‌های اداری',
+    icon: '📄',
+    color: 'linear-gradient(135deg,#fa709a,#fee140)',
+    bg: 'rgba(250,112,154,0.1)',
+    password: null,
+    isPublic: true,
+  },
+  {
+    id: 'minutes',
+    name: 'صورتجلسه',
+    icon: '📝',
+    color: 'linear-gradient(135deg,#a18cd1,#fbc2eb)',
+    bg: 'rgba(161,140,209,0.12)',
+    password: null,
+    isPublic: true,
+  },
+];
+
+// Initial prompts data
+let PROMPTS = {
+  hr: [
+    {
+      id: 'hr1', title: 'تدوین شرح شغل (Job Description)',
+      text: `در نقش یک متخصص ارشد منابع انسانی، تحلیل شغل و طراحی ساختار سازمانی عمل کن.
+
+برای موقعیت شغلی زیر یک شرح شغل حرفه‌ای و استاندارد تهیه کن.
+
+اطلاعات ورودی:
+
+عنوان شغل: [عنوان شغل]
+واحد سازمانی: [نام واحد]
+محل استقرار: [محل کار]
+گزارش‌دهی به: [عنوان مدیر مستقیم]
+تعداد نفرات تحت سرپرستی: [تعداد]
+
+هدف شغل:
+[هدف اصلی شغل]
+
+مسئولیت‌های کلیدی:
+[فهرست مسئولیت‌ها]
+
+شرایط احراز:
+[تحصیلات، سابقه، مهارت‌ها]
+
+خروجی را در قالب زیر ارائه کن:
+1- هدف شغل
+2- مسئولیت‌ها و وظایف اصلی
+3- اختیارات
+4- شاخص‌های ارزیابی عملکرد (KPI)
+5- شرایط احراز
+6- دانش مورد نیاز
+7- مهارت‌های مورد نیاز
+8- شایستگی‌های رفتاری
+9- مسیر رشد شغلی
+10- چالش‌های کلیدی این موقعیت
+
+خروجی باید رسمی، حرفه‌ای و قابل استفاده در سازمان باشد.`
+    },
+    {
+      id: 'hr2', title: 'استخراج شایستگی‌های کلیدی',
+      text: `در نقش یک متخصص شایستگی‌ها (Competency Management Specialist) و روان‌شناس صنعتی و سازمانی عمل کن.
+
+برای موقعیت شغلی زیر، مدل شایستگی طراحی کن.
+
+اطلاعات ورودی:
+
+عنوان شغل: [عنوان شغل]
+
+شرح شغل:
+[شرح شغل]
+
+وظایف اصلی:
+[وظایف]
+
+خروجی را در قالب زیر ارائه کن:
+1- شایستگی‌های عمومی
+2- شایستگی‌های تخصصی
+3- شایستگی‌های مدیریتی (در صورت نیاز)
+4- سطح مورد نیاز هر شایستگی از ۱ تا ۵
+5- شاخص‌های رفتاری قابل مشاهده برای هر شایستگی
+6- سوالات پیشنهادی برای ارزیابی هر شایستگی
+7- ریسک‌های ناشی از ضعف در هر شایستگی
+
+جدول نهایی را به گونه‌ای طراحی کن که مستقیماً در مدل شایستگی سازمان قابل استفاده باشد.`
+    },
+    {
+      id: 'hr3', title: 'طراحی سوالات مصاحبه',
+      text: `در نقش یک مصاحبه‌گر ارشد استخدام، روان‌شناس صنعتی و متخصص ارزیابی شایستگی عمل کن.
+
+برای موقعیت زیر یک راهنمای کامل مصاحبه طراحی کن.
+
+عنوان شغل:
+[عنوان شغل]
+
+شرح شغل:
+[شرح شغل]
+
+شایستگی‌های کلیدی:
+[شایستگی‌ها]
+
+خروجی شامل:
+1- سوالات تخصصی
+2- سوالات رفتاری مبتنی بر مدل STAR
+3- سوالات حل مسئله
+4- سوالات سنجش انگیزه
+5- سوالات سنجش تناسب فرهنگی
+6- سوالات سنجش یادگیری و توسعه
+
+برای هر سوال:
+* هدف سوال
+* پاسخ مطلوب
+* نشانه‌های هشداردهنده
+* امتیازدهی از ۱ تا ۵
+
+در پایان یک فرم جمع‌بندی مصاحبه نیز طراحی کن.`
+    },
+    {
+      id: 'hr4', title: 'ارزیابی رزومه',
+      text: `در نقش یک مدیر جذب و استخدام و متخصص ارزیابی استعداد عمل کن.
+
+رزومه زیر را برای موقعیت شغلی [عنوان شغل] ارزیابی کن.
+
+شرح شغل:
+[JD]
+
+رزومه:
+[رزومه]
+
+خروجی شامل:
+- میزان تطابق با شغل (درصد)
+- نقاط قوت
+- نقاط ضعف
+- شکاف‌های تخصصی
+- شکاف‌های مدیریتی
+- ریسک‌های استخدام
+- سوالات پیشنهادی برای مصاحبه
+- احتمال موفقیت در شغل (کم، متوسط، زیاد)
+
+پیشنهاد نهایی:
+- مناسب برای مرحله بعد
+- نیازمند بررسی بیشتر
+- عدم پیشنهاد
+
+تحلیل باید مبتنی بر شواهد موجود در رزومه باشد و از فرضیات بدون مستندات اجتناب شود.`
+    },
+    {
+      id: 'hr5', title: 'تهیه گزارش مصاحبه',
+      text: `در نقش یک کارشناس ارشد منابع انسانی عمل کن.
+
+بر اساس یادداشت‌های مصاحبه زیر، یک گزارش حرفه‌ای استخدامی تهیه کن.
+
+یادداشت‌های مصاحبه:
+[متن مصاحبه]
+
+عنوان شغل:
+[عنوان شغل]
+
+هدف گزارش:
+تصمیم‌گیری برای استخدام در مرحله نهایی.
+
+الزامات:
+- گزارش با عبارت «با سلام، احتراما گزارش مصاحبه با آقای/خانم ... به شرح زیر به حضور ارسال می‌شود» آغاز شود.
+- ابتدا نقاط قوت بیان شود.
+- سپس نقاط قابل بهبود بیان شود.
+- تحلیل‌ها مبتنی بر شواهد مصاحبه باشند.
+- لحن حرفه‌ای و غیرشخصی باشد.
+- پیشنهاد توسعه‌ای برای هر مورد قابل بهبود ارائه شود.
+- در پایان جمع‌بندی و پیشنهاد استخدام ارائه شود.`
+    },
+    {
+      id: 'hr6', title: 'مقایسه چند کاندیدا',
+      text: `در نقش مدیر جذب و استخدام و عضو کمیته ارزیابی عمل کن.
+
+کاندیداهای زیر را برای موقعیت [عنوان شغل] مقایسه کن.
+
+شرح شغل:
+[JD]
+
+مشخصات کاندیداها:
+[اطلاعات افراد]
+
+خروجی شامل:
+1- جدول مقایسه (دانش تخصصی، تجربه مرتبط، مهارت‌های فنی، مهارت‌های رفتاری، پتانسیل رشد، تناسب فرهنگی، توان رهبری، ریسک استخدام)
+2- امتیاز نهایی هر فرد از ۱۰۰
+3- رتبه‌بندی نهایی
+4- نقاط قوت و ضعف هر فرد
+5- پیشنهاد استخدام به همراه استدلال
+6- سوالات تکمیلی موردنیاز برای تصمیم‌گیری نهایی`
+    },
+    {
+      id: 'hr7', title: 'طراحی آزمون استخدامی',
+      text: `در نقش یک متخصص ارزیابی و طراحی آزمون استخدامی عمل کن.
+
+برای موقعیت زیر یک آزمون استخدامی حرفه‌ای طراحی کن.
+
+عنوان شغل: [عنوان شغل]
+شرح شغل: [شرح شغل]
+سطح شغلی: [کارشناس / سرپرست / مدیر]
+
+خروجی شامل:
+- اهداف آزمون
+- شایستگی‌های مورد ارزیابی
+- تعداد سوالات پیشنهادی
+- سوالات چندگزینه‌ای
+- سوالات تشریحی
+- سوالات تحلیل موردی (Case Study)
+- کلید پاسخ
+- بارم‌بندی
+- حدنصاب قبولی
+- روش تحلیل نتایج
+
+آزمون باید توان تفکیک افراد قوی، متوسط و ضعیف را داشته باشد.`
+    },
+    {
+      id: 'hr8', title: 'طراحی مرکز ارزیابی (Assessment Center)',
+      text: `در نقش مشاور ارشد Assessment Center و توسعه رهبری عمل کن.
+
+برای موقعیت شغلی زیر یک مرکز ارزیابی کامل طراحی کن.
+
+عنوان شغل: [عنوان شغل]
+سطح سازمانی: [کارشناس / سرپرست / مدیر]
+شایستگی‌های مورد ارزیابی: [شایستگی‌ها]
+
+خروجی شامل:
+1- اهداف مرکز ارزیابی
+2- شایستگی‌های مورد سنجش
+3- تمرین‌های پیشنهادی: In Basket، Role Play، Leaderless Group Discussion، Case Analysis، Presentation، Interview
+4- زمان‌بندی اجرای هر تمرین
+5- شاخص‌های مشاهده رفتاری
+6- فرم امتیازدهی ارزیابان
+7- مدل تجمیع امتیازات
+8- گزارش نهایی شرکت‌کنندگان
+9- تصمیم‌گیری نهایی (Ready Now / Ready Later / Not Ready)
+
+طراحی باید مطابق استانداردهای بین‌المللی Assessment Center و قابل اجرا در سازمان باشد.`
+    },
+    {
+      id: 'hr9', title: 'نیازسنجی آموزشی (TNA)',
+      text: `در نقش یک متخصص ارشد یادگیری و توسعه (L&D)، توسعه سازمانی و مدیریت شایستگی‌ها عمل کن.
+
+برای موقعیت شغلی زیر یک نیازسنجی آموزشی کامل انجام بده.
+
+عنوان شغل: [عنوان شغل]
+واحد سازمانی: [واحد]
+شرح شغل: [شرح شغل]
+شایستگی‌های مورد انتظار: [شایستگی‌ها]
+وضعیت فعلی کارکنان: [شرح وضعیت فعلی]
+اهداف کسب‌وکار: [اهداف]
+
+خروجی:
+1- تحلیل شکاف عملکرد
+2- تحلیل شکاف دانشی
+3- تحلیل شکاف مهارتی
+4- تحلیل شکاف نگرشی
+5- اولویت‌بندی نیازهای آموزشی
+6- نیازهای فوری، میان‌مدت و بلندمدت
+7- روش پیشنهادی توسعه هر نیاز
+8- شاخص‌های موفقیت آموزش
+9- ریسک‌های عدم توسعه
+10- برنامه پیشنهادی آموزش سالانه`
+    },
+    {
+      id: 'hr10', title: 'طراحی مسیر یادگیری (Learning Path)',
+      text: `در نقش یک Learning Architect و متخصص توسعه سرمایه انسانی عمل کن.
+
+برای موقعیت شغلی زیر یک مسیر یادگیری کامل طراحی کن.
+
+عنوان شغل: [عنوان شغل]
+سطح شغلی: [کارشناس / سرپرست / مدیر]
+دانش فعلی: [وضعیت فعلی]
+سطح هدف: [سطح مورد انتظار]
+
+خروجی شامل:
+1- شایستگی‌های هدف
+2- دانش‌های مورد نیاز
+3- مهارت‌های مورد نیاز
+4- دوره‌های آموزشی پیشنهادی
+5- کتاب‌های پیشنهادی
+6- پروژه‌های یادگیری
+7- فعالیت‌های یادگیری حین کار (OJT)
+8- منتورینگ و کوچینگ مورد نیاز
+9- ترتیب یادگیری
+10- مدت زمان پیشنهادی هر مرحله
+11- شاخص‌های ارزیابی موفقیت
+12- نقشه راه توسعه ۳، ۶ و ۱۲ ماهه`
+    },
+    {
+      id: 'hr11', title: 'طراحی برنامه توسعه فردی (IDP)',
+      text: `در نقش یک متخصص توسعه استعداد و کوچ توسعه فردی عمل کن.
+
+برای فرد زیر یک برنامه توسعه فردی (IDP) طراحی کن.
+
+نام: [نام]
+سمت: [سمت]
+سطح عملکرد: [سطح عملکرد]
+نقاط قوت: [نقاط قوت]
+نقاط قابل بهبود: [موارد قابل بهبود]
+اهداف شغلی: [اهداف]
+
+خروجی شامل:
+1- خلاصه وضعیت فعلی
+2- اهداف توسعه‌ای
+3- شایستگی‌های نیازمند توسعه
+4- اقدامات توسعه‌ای
+5- آموزش‌های مورد نیاز
+6- پروژه‌های توسعه‌ای
+7- فعالیت‌های یادگیری حین کار
+8- جلسات منتورینگ یا کوچینگ
+9- زمان‌بندی اجرای برنامه
+10- شاخص‌های موفقیت
+11- ریسک‌های احتمالی
+12- فرم پایش پیشرفت`
+    },
+    {
+      id: 'hr12', title: 'طراحی ماتریس مهارت (Skill Matrix)',
+      text: `در نقش متخصص مدیریت شایستگی، برنامه‌ریزی نیروی انسانی و توسعه سازمانی عمل کن.
+
+برای واحد زیر یک ماتریس مهارت طراحی کن.
+
+واحد سازمانی: [نام واحد]
+مشاغل موجود: [فهرست مشاغل]
+وظایف اصلی واحد: [وظایف]
+
+خروجی شامل:
+1- شناسایی مهارت‌های موردنیاز
+2- طبقه‌بندی مهارت‌ها (فنی، مدیریتی، رفتاری، نرم‌افزاری، ایمنی)
+3- تعیین سطح مهارت از ۱ تا ۵
+4- طراحی جدول Skill Matrix
+5- تعیین حداقل سطح مورد نیاز هر شغل
+6- شناسایی شکاف مهارتی
+7- اولویت‌های توسعه‌ای
+8- ریسک‌های ناشی از کمبود مهارت
+9- پیشنهاد برنامه ارتقای مهارت
+10- داشبورد مدیریتی وضعیت مهارت‌ها
+
+خروجی باید مستقیماً قابل انتقال به اکسل باشد.`
+    },
+    {
+      id: 'hr13', title: 'طراحی دوره آموزشی',
+      text: `در نقش یک طراح آموزشی حرفه‌ای (Instructional Designer) و متخصص یادگیری بزرگسالان عمل کن.
+
+برای موضوع زیر یک دوره آموزشی کامل طراحی کن.
+
+عنوان دوره: [عنوان]
+مخاطبان: [مخاطبان]
+سطح: [مقدماتی / متوسط / پیشرفته]
+مدت دوره: [مدت]
+
+خروجی شامل:
+1- نیاز آموزشی
+2- اهداف یادگیری
+3- خروجی‌های مورد انتظار
+4- سرفصل‌ها
+5- ریزمحتواهای هر سرفصل
+6- روش تدریس
+7- تمرین‌ها
+8- مطالعات موردی
+9- پروژه پایانی
+10- آزمون قبل از دوره
+11- آزمون پایان دوره
+12- روش ارزیابی اثربخشی
+13- منابع یادگیری
+14- برنامه زمان‌بندی جلسات
+
+طراحی دوره باید مبتنی بر اصول Adult Learning و آموزش مبتنی بر شایستگی باشد.`
+    },
+  ],
+
+  sys: [
+    {
+      id: 'sys1', title: 'مستندسازی فرایندها (Process Documentation)',
+      text: `در نقش یک متخصص ارشد مدیریت فرایندهای کسب‌وکار (BPM)، تحلیلگر سیستم‌ها و روش‌ها و مشاور بهبود فرایند عمل کن.
+
+فرایند زیر را به‌صورت کامل مستندسازی کن.
+
+نام فرایند: [نام فرایند]
+هدف فرایند: [هدف]
+مالک فرایند: [مالک]
+واحدهای درگیر: [واحدها]
+شرح مراحل: [مراحل فعلی]
+خروجی‌ها: [خروجی‌ها]
+ورودی‌ها: [ورودی‌ها]
+
+خروجی:
+1- معرفی فرایند
+2- هدف فرایند
+3- دامنه فرایند
+4- ذینفعان
+5- ورودی‌ها
+6- خروجی‌ها
+7- مراحل اجرایی فرایند
+8- مسئول هر مرحله (RACI)
+9- فرم‌ها و مستندات مورد استفاده
+10- شاخص‌های عملکرد فرایند (KPI)
+11- ریسک‌های هر مرحله
+12- کنترل‌های داخلی موجود
+13- نقاط ضعف احتمالی
+14- فرصت‌های بهبود`
+    },
+    {
+      id: 'sys2', title: 'طراحی BPMN',
+      text: `در نقش یک متخصص BPMN 2.0، تحلیلگر کسب‌وکار و مشاور تحول فرایند عمل کن.
+
+بر اساس اطلاعات زیر، مدل BPMN فرایند را طراحی کن.
+
+نام فرایند: [نام فرایند]
+واحدهای درگیر: [واحدها]
+شرح مراحل: [مراحل]
+قوانین کسب‌وکار: [Business Rules]
+استثناها: [Exception Cases]
+
+خروجی شامل:
+1- معرفی فرایند
+2- Pool ها
+3- Lane ها
+4- Start Event
+5- End Event
+6- Activity ها
+7- Decision Gateway ها
+8- Message Flow ها
+9- Sequence Flow ها
+10- Business Rule ها
+11- Exception Flow ها
+12- شرح کامل دیاگرام BPMN
+
+سپس کد متنی BPMN XML اولیه را نیز تولید کن تا در نرم‌افزارهایی مانند Bizagi، Camunda یا Visio قابل استفاده باشد.`
+    },
+    {
+      id: 'sys3', title: 'شناسایی گلوگاه‌های فرایند (Bottleneck Analysis)',
+      text: `در نقش مشاور بهبود فرایند، متخصص Lean Management و تحلیلگر عملیات عمل کن.
+
+فرایند زیر را تحلیل کرده و گلوگاه‌های آن را شناسایی کن.
+
+نام فرایند: [نام فرایند]
+مراحل فرایند: [مراحل]
+زمان هر مرحله: [زمان]
+منابع هر مرحله: [منابع]
+حجم کار: [حجم کار]
+مشکلات موجود: [مشکلات]
+
+خروجی شامل:
+1- نقشه کلی جریان کار
+2- تحلیل ظرفیت هر مرحله
+3- شناسایی گلوگاه‌ها
+4- دلایل ایجاد گلوگاه
+5- میزان اثر هر گلوگاه بر زمان و هزینه
+6- تحلیل ریسک گلوگاه‌ها
+7- اولویت‌بندی گلوگاه‌ها
+8- راهکارهای کوتاه‌مدت
+9- راهکارهای میان‌مدت
+10- راهکارهای بلندمدت
+11- برآورد بهبود زمان چرخه (Cycle Time)
+12- برآورد افزایش بهره‌وری
+
+در پایان یک برنامه اجرایی بهبود با اولویت‌بندی اقدامات ارائه کن.`
+    },
+    {
+      id: 'sys4', title: 'تحلیل اتلاف‌ها (Lean Waste Analysis)',
+      text: `در نقش متخصص Lean Management، مهندس صنایع و مشاور بهره‌وری سازمانی عمل کن.
+
+فرایند زیر را از منظر اتلاف‌ها (Waste Analysis) تحلیل کن.
+
+نام فرایند: [نام فرایند]
+شرح فرایند: [شرح فرایند]
+مراحل: [مراحل]
+مشکلات موجود: [مشکلات]
+
+خروجی را بر اساس مدل DOWNTIME ارائه کن:
+D - Defects (خطاها)
+O - Overproduction (تولید مازاد)
+W - Waiting (انتظار)
+N - Non-utilized Talent (استعداد استفاده‌نشده)
+T - Transportation (جابجایی غیرضروری)
+I - Inventory (موجودی اضافی)
+M - Motion (حرکات غیرضروری)
+E - Extra Processing (پردازش اضافی)
+
+برای هر اتلاف: شواهد موجود، ریشه‌های احتمالی، میزان اثر، اولویت اصلاح، اقدامات اصلاحی، شاخص سنجش بهبود
+
+در پایان: جمع‌بندی، برآورد صرفه‌جویی، Quick Wins و Roadmap بهبود ۹۰ روزه`
+    },
+    {
+      id: 'sys5', title: 'طراحی فرایند بهینه (To-Be Process Design)',
+      text: `در نقش مشاور تحول فرایند، متخصص BPM و Lean Six Sigma Black Belt عمل کن.
+
+فرایند فعلی زیر را بازطراحی کن.
+
+فرایند فعلی: [شرح فرایند]
+مشکلات: [مشکلات]
+اهداف کسب‌وکار: [اهداف]
+محدودیت‌ها: [محدودیت‌ها]
+
+خروجی شامل:
+1- تحلیل وضعیت موجود (As-Is)
+2- مشکلات کلیدی
+3- ریشه‌های مشکلات
+4- فرایند پیشنهادی (To-Be)
+5- مراحل جدید فرایند
+6- فعالیت‌های حذف‌شده
+7- فعالیت‌های ادغام‌شده
+8- فعالیت‌های خودکارسازی‌شده
+9- نقش‌های جدید
+10- BPMN پیشنهادی
+11- ریسک‌های اجرای تغییر
+12- برنامه پیاده‌سازی
+13- KPIهای پیشنهادی
+14- برآورد بهبود زمان، هزینه و کیفیت
+
+در پایان جدول مقایسه As-Is و To-Be ارائه کن.`
+    },
+    {
+      id: 'sys6', title: 'طراحی شاخص‌های فرایندی (Process KPI Design)',
+      text: `در نقش متخصص مدیریت عملکرد، BPM و تحلیل داده‌های عملیاتی عمل کن.
+
+برای فرایند زیر KPIهای مناسب طراحی کن.
+
+نام فرایند: [نام فرایند]
+هدف فرایند: [هدف]
+خروجی‌های فرایند: [خروجی‌ها]
+
+خروجی شامل:
+1- KPIهای اثربخشی
+2- KPIهای کارایی
+3- KPIهای کیفیت
+4- KPIهای زمان
+5- KPIهای هزینه
+6- KPIهای رضایت مشتری
+
+برای هر KPI: تعریف، فرمول محاسبه، منبع داده، تناوب اندازه‌گیری، مقدار هدف، آستانه هشدار، مسئول پایش`
+    },
+    {
+      id: 'sys7', title: 'تحلیل ریسک فرایند (Process Risk Assessment)',
+      text: `در نقش یک متخصص مدیریت ریسک سازمانی (ERM)، حسابرس داخلی، مشاور کنترل‌های داخلی و تحلیلگر فرایند عمل کن.
+
+ریسک‌های فرایند زیر را تحلیل و ارزیابی کن.
+
+نام فرایند: [نام فرایند]
+هدف فرایند: [هدف فرایند]
+شرح فرایند: [شرح فرایند]
+مراحل فرایند: [مراحل]
+واحدهای درگیر: [واحدها]
+
+خروجی: معرفی فرایند، اهداف کنترلی، شناسایی ریسک‌های هر مرحله، طبقه‌بندی ریسک‌ها، علت‌های احتمالی، پیامدها، احتمال وقوع (۱-۵)، شدت اثر (۱-۵)، سطح ریسک ذاتی، کنترل‌های موجود، اثربخشی کنترل‌ها، سطح ریسک باقیمانده، کنترل‌های تکمیلی، اولویت اقدامات، نقشه حرارتی ریسک‌ها
+
+در پایان یک جدول Risk Register استاندارد ارائه کن.`
+    },
+    {
+      id: 'sys8', title: 'طراحی کنترل‌های داخلی (Internal Control Design)',
+      text: `در نقش یک متخصص کنترل داخلی، حسابرس داخلی، مشاور حاکمیت شرکتی و تحلیلگر فرایند عمل کن.
+
+برای فرایند زیر کنترل‌های داخلی مناسب طراحی کن.
+
+نام فرایند: [نام فرایند]
+شرح فرایند: [شرح فرایند]
+ریسک‌های شناسایی شده: [ریسک‌ها]
+
+خروجی شامل:
+1- اهداف کنترلی فرایند
+2- ریسک‌های کلیدی
+3- کنترل‌های پیشگیرانه (Preventive Controls)
+4- کنترل‌های کشف‌کننده (Detective Controls)
+5- کنترل‌های اصلاحی (Corrective Controls)
+6- کنترل‌های دستی
+7- کنترل‌های سیستمی
+8- کنترل‌های نظارتی
+9- مسئول اجرا، تناوب، مستندات، شواهد، روش آزمون، شاخص‌های پایش، ریسک‌های باقیمانده
+
+در پایان ماتریس Risk & Control Matrix (RCM) ارائه کن.`
+    },
+    {
+      id: 'sys9', title: 'طراحی داشبورد مدیریتی (Management Dashboard)',
+      text: `در نقش یک متخصص هوش تجاری (BI)، تحلیلگر داده، مدیر عملکرد سازمانی و طراح داشبوردهای مدیریتی عمل کن.
+
+برای فرایند یا واحد زیر یک داشبورد مدیریتی حرفه‌ای طراحی کن.
+
+نام واحد یا فرایند: [نام]
+اهداف کسب‌وکار: [اهداف]
+KPIهای موجود: [شاخص‌ها]
+گروه‌های استفاده‌کننده: [مدیرعامل، مدیران، سرپرستان و ...]
+
+خروجی شامل: اهداف داشبورد، مخاطبان، سوالات مدیریتی، KPIهای کلیدی/عملیاتی/مالی/کیفیت/بهره‌وری/ریسک
+طراحی پیشنهادی: صفحه مدیرعامل، مدیر واحد، عملیاتی
+برای هر صفحه: نمودارها، جداول، فیلترها، Drill Downها، هشدارها
+پیشنهاد پیاده‌سازی در Power BI، Excel یا Tableau`
+    },
+    {
+      id: 'sys10', title: 'تحلیل علل ریشه‌ای مشکلات (Root Cause Analysis)',
+      text: `در نقش متخصص Lean Six Sigma Black Belt، تحلیلگر فرایند و مشاور بهره‌وری عمل کن.
+
+مشکل زیر را تحلیل کن.
+
+فرایند: [نام فرایند]
+شرح مشکل: [مشکل]
+داده‌های موجود: [داده‌ها]
+
+خروجی شامل:
+1- تعریف دقیق مسئله
+2- تحلیل علائم
+3- تحلیل ریشه‌ای با روش 5 Why
+4- تحلیل Fishbone Diagram
+5- دسته‌بندی علل (انسان، فرایند، فناوری، تجهیزات، مواد، محیط)
+6- علت‌های اصلی
+7- شواهد مورد نیاز برای تایید علت‌ها
+8- اقدامات اصلاحی
+9- اقدامات پیشگیرانه
+10- شاخص‌های پایش اثربخشی
+
+در پایان Action Plan شامل مسئول، زمان‌بندی و خروجی مورد انتظار ارائه کن.`
+    },
+    {
+      id: 'sys11', title: 'طراحی پروژه بهبود فرایند',
+      text: `در نقش مشاور تحول سازمانی، متخصص Lean Six Sigma و مدیر پروژه بهبود فرایند عمل کن.
+
+برای فرایند زیر یک پروژه بهبود طراحی کن.
+
+نام فرایند: [نام]
+مشکلات فعلی: [مشکلات]
+شاخص‌های فعلی: [شاخص‌ها]
+اهداف مورد انتظار: [اهداف]
+
+خروجی شامل: تعریف پروژه، Business Case، وضعیت موجود و هدف، تحلیل شکاف، دامنه، ذی‌نفعان، ریسک‌ها، Quick Wins، پروژه‌های میان‌مدت و بلندمدت، KPIها، زمان‌بندی، منابع، برآورد صرفه‌جویی مالی، داشبورد پایش
+
+خروجی را مطابق ساختار DMAIC ارائه کن.`
+    },
+    {
+      id: 'sys12', title: 'خودکارسازی فرایند (Process Automation Assessment)',
+      text: `در نقش متخصص تحول دیجیتال، اتوماسیون فرایندها (RPA)، تحلیلگر کسب‌وکار و مشاور فناوری اطلاعات عمل کن.
+
+فرایند زیر را از منظر قابلیت خودکارسازی بررسی کن.
+
+نام فرایند: [نام فرایند]
+شرح مراحل: [مراحل]
+تعداد تراکنش: [حجم کار]
+تعداد کارکنان درگیر: [تعداد]
+سیستم‌های مورد استفاده: [سیستم‌ها]
+
+خروجی شامل: تحلیل وضعیت موجود، فعالیت‌های تکراری، قانون‌محور، مناسب RPA، مناسب Workflow Automation، نیازمند تصمیم انسانی، اولویت‌های اتوماسیون، برآورد کاهش زمان/هزینه/خطا، ریسک‌ها، نقشه راه پیاده‌سازی، فناوری‌های پیشنهادی، ROI
+
+در پایان ماتریس Automation Opportunity Assessment ارائه کن.`
+    },
+  ],
+
+  pmo: [
+    {
+      id: 'pmo1', title: 'تهیه ساختار شکست کار (WBS)',
+      text: `در نقش یک مدیر پروژه ارشد (PMP)، متخصص PMBOK و مشاور برنامه‌ریزی پروژه عمل کن.
+
+برای پروژه زیر یک ساختار شکست کار (WBS) حرفه‌ای طراحی کن.
+
+نام پروژه: [نام پروژه]
+هدف پروژه: [هدف]
+دامنه پروژه: [دامنه]
+خروجی‌های اصلی پروژه: [Deliverables]
+محدودیت‌ها: [محدودیت‌ها]
+
+خروجی شامل:
+1- اهداف پروژه
+2- محدوده پروژه
+3- خروجی‌های اصلی
+4- سطوح مختلف WBS (حداقل تا سطح ۳)
+5- Work Package های هر بخش
+6- شرح هر Work Package
+7- معیار تکمیل هر Work Package
+8- وابستگی بین فعالیت‌ها
+9- مسئول هر بخش
+10- ریسک‌های کلیدی هر بخش
+11- نقاط کنترل (Milestones)
+12- ساختار کدگذاری WBS
+
+خروجی را قابل انتقال به MS Project یا Primavera ارائه کن.`
+    },
+    {
+      id: 'pmo2', title: 'تهیه برنامه زمان‌بندی پروژه',
+      text: `در نقش یک برنامه‌ریز پروژه حرفه‌ای و متخصص Primavera P6 و MS Project عمل کن.
+
+برای پروژه زیر برنامه زمان‌بندی تهیه کن.
+
+نام پروژه: [نام پروژه]
+WBS: [ساختار شکست کار]
+تاریخ شروع: [تاریخ]
+محدودیت‌های زمانی: [محدودیت‌ها]
+منابع موجود: [منابع]
+
+خروجی شامل: فعالیت‌های پروژه، مدت زمان، وابستگی‌ها، مسیر بحرانی (Critical Path)، نقاط عطف، برنامه ماهانه و هفتگی، شناوری فعالیت‌ها (Float)، ریسک‌های زمانی، اقدامات جبرانی، پیش‌بینی تاریخ پایان، پیشنهاد بهینه‌سازی
+
+در پایان جدول زمان‌بندی مشابه Gantt Chart ارائه کن.`
+    },
+    {
+      id: 'pmo3', title: 'تحلیل ریسک پروژه',
+      text: `در نقش یک مدیر ریسک پروژه، مشاور PMO و متخصص مدیریت ریسک سازمانی عمل کن.
+
+ریسک‌های پروژه زیر را تحلیل کن.
+
+نام پروژه: [نام پروژه]
+اهداف: [اهداف]
+دامنه: [دامنه]
+زمان‌بندی: [زمان‌بندی]
+بودجه: [بودجه]
+ذی‌نفعان: [ذی‌نفعان]
+
+خروجی: شناسایی ریسک‌ها، طبقه‌بندی (زمان، هزینه، کیفیت، منابع انسانی، فنی، قراردادی، تامین‌کنندگان، ایمنی، محیط زیست)، احتمال وقوع، شدت اثر، سطح ریسک، Risk Matrix، Risk Heat Map، اقدامات پیشگیرانه، برنامه واکنش، Contingency Plan، مسئول، شاخص‌های هشدار زودهنگام
+
+در پایان Risk Register استاندارد ارائه کن.`
+    },
+    {
+      id: 'pmo4', title: 'برآورد منابع پروژه',
+      text: `در نقش مدیر پروژه، برنامه‌ریز منابع و متخصص مدیریت ظرفیت سازمانی عمل کن.
+
+برای پروژه زیر منابع مورد نیاز را برآورد کن.
+
+نام پروژه: [نام پروژه]
+دامنه پروژه: [دامنه]
+WBS: [ساختار شکست کار]
+زمان اجرا: [مدت]
+
+خروجی: منابع انسانی، تخصص‌ها، تعداد نفرات، تجهیزات، نرم‌افزارها، مواد مصرفی، منابع مالی، ظرفیت مورد نیاز، منابع بحرانی، ریسک کمبود منابع، برنامه تخصیص، Resource Loading، Resource Leveling، برنامه جایگزینی، برآورد هزینه
+
+در پایان ماتریس تخصیص منابع (RAM) ارائه کن.`
+    },
+    {
+      id: 'pmo5', title: 'تدوین منشور پروژه (Project Charter)',
+      text: `در نقش مدیر پروژه ارشد و مشاور PMO عمل کن.
+
+برای پروژه زیر یک منشور پروژه حرفه‌ای تهیه کن.
+
+نام پروژه: [نام]
+هدف: [هدف]
+کارفرما: [کارفرما]
+مدیر پروژه: [مدیر پروژه]
+بودجه: [بودجه]
+زمان اجرا: [مدت]
+
+خروجی شامل:
+1- معرفی پروژه
+2- اهداف پروژه
+3- دامنه پروژه
+4- خروجی‌های کلیدی
+5- شاخص‌های موفقیت
+6- فرضیات
+7- محدودیت‌ها
+8- ذی‌نفعان اصلی
+9- ساختار حاکمیت پروژه
+10- ریسک‌های اولیه
+11- نقاط عطف کلیدی
+12- اختیارات مدیر پروژه
+13- معیارهای خاتمه پروژه
+
+خروجی را در قالب استاندارد PMBOK ارائه کن.`
+    },
+    {
+      id: 'pmo6', title: 'تحلیل وضعیت پروژه و گزارش پیشرفت',
+      text: `در نقش مدیر PMO، مدیر پروژه و مشاور کنترل پروژه عمل کن.
+
+وضعیت پروژه زیر را تحلیل کن.
+
+نام پروژه: [نام پروژه]
+برنامه مصوب: [برنامه]
+پیشرفت واقعی: [پیشرفت]
+بودجه مصوب: [بودجه]
+هزینه واقعی: [هزینه]
+مشکلات: [مشکلات]
+
+خروجی: درصد پیشرفت، وضعیت زمان/هزینه/کیفیت، تحلیل انحرافات، علل انحراف، ریسک‌های فعلی، اقدامات اصلاحی، پیش‌بینی پایان، وضعیت کلی (سبز/زرد/قرمز)، تصمیمات مدیریتی مورد نیاز، گزارش یک‌صفحه‌ای برای مدیرعامل، داشبورد خلاصه`
+    },
+    {
+      id: 'pmo7', title: 'تحلیل ذی‌نفعان پروژه (Stakeholder Analysis)',
+      text: `در نقش مدیر پروژه و متخصص مدیریت ذی‌نفعان عمل کن.
+
+برای پروژه زیر تحلیل ذی‌نفعان انجام بده.
+
+نام پروژه: [نام پروژه]
+توضیح پروژه: [شرح پروژه]
+ذی‌نفعان شناخته شده: [ذی‌نفعان]
+
+خروجی: شناسایی ذی‌نفعان، نقش، میزان قدرت و علاقه، ماتریس Power-Interest، انتظارات، نگرانی‌های احتمالی، استراتژی مدیریت، برنامه ارتباطات، ریسک‌های مرتبط، برنامه تعامل
+
+در پایان Stakeholder Register استاندارد ارائه کن.`
+    },
+    {
+      id: 'pmo8', title: 'گزارش پیشرفت پروژه (Progress Report)',
+      text: `در نقش مدیر کنترل پروژه (Project Control Specialist) و عضو PMO عمل کن.
+
+برای پروژه زیر یک گزارش پیشرفت حرفه‌ای تهیه کن.
+
+نام پروژه: [نام پروژه]
+برنامه مصوب: [برنامه زمانی / درصدی]
+پیشرفت واقعی: [پیشرفت واقعی]
+بودجه: [بودجه]
+هزینه واقعی: [هزینه]
+وضعیت فعالیت‌ها: [شرح وضعیت]
+
+خروجی شامل:
+1- خلاصه وضعیت پروژه (Executive Summary)
+2- درصد پیشرفت فیزیکی
+3- Planned vs Actual
+4- وضعیت زمان و هزینه
+5- فعالیت‌های انجام‌شده، در حال اجرا، عقب‌افتاده
+6- ریسک‌های فعلی
+7- مسائل کلیدی (Issues)
+8- اقدامات اصلاحی
+9- Forecast Completion
+10- وضعیت کلی (سبز/زرد/قرمز)
+11- جمع‌بندی مدیریتی (حداکثر ۵ خط)`
+    },
+    {
+      id: 'pmo9', title: 'تحلیل تأخیر پروژه (Delay Analysis)',
+      text: `در نقش متخصص برنامه‌ریزی و کنترل پروژه (Planning & Scheduling Expert) عمل کن.
+
+برای پروژه زیر تحلیل تأخیر انجام بده.
+
+نام پروژه: [نام پروژه]
+برنامه زمان‌بندی: [Baseline Schedule]
+وضعیت واقعی: [Actual Progress]
+فعالیت‌های تأخیرخورده: [Activities]
+
+خروجی: فعالیت‌های دارای تأخیر، میزان تأخیر، نوع تأخیر (Critical/Non-Critical/Excusable/Non-Excusable)، اثر بر مسیر بحرانی، تحلیل علت، Float Analysis، سناریوی بدبینانه، Recovery Plan، فشرده‌سازی زمان (Crashing/Fast Tracking)، مسئول، برآورد کاهش تأخیر`
+    },
+    {
+      id: 'pmo10', title: 'تحلیل انحرافات پروژه (Variance Analysis)',
+      text: `در نقش مدیر PMO، کنترل پروژه و تحلیلگر عملکرد پروژه عمل کن.
+
+برای پروژه زیر تحلیل انحرافات انجام بده.
+
+نام پروژه: [نام پروژه]
+برنامه مصوب: [Baseline]
+عملکرد واقعی: [Actual]
+بودجه: [Budget]
+هزینه واقعی: [Actual Cost]
+
+خروجی: تحلیل انحراف زمان (SV)، انحراف هزینه (CV)، انحراف پیشرفت فیزیکی، علت انحرافات، تفکیک قابل/غیرقابل کنترل، اثر بر پایان پروژه، شاخص‌های EVM (SV، CV، SPI، CPI)، سطح هشدار، اقدامات اصلاحی، EAC/ETC، توصیه مدیریتی`
+    },
+    {
+      id: 'pmo11', title: 'طراحی اقدامات اصلاحی (Corrective Action Plan)',
+      text: `در نقش مدیر پروژه ارشد، متخصص PMO و تحلیلگر عملکرد پروژه عمل کن.
+
+بر اساس وضعیت زیر، یک برنامه اقدامات اصلاحی طراحی کن.
+
+وضعیت پروژه: [شرح مشکلات]
+انحرافات: [انحرافات]
+ریسک‌ها: [ریسک‌ها]
+
+خروجی: تعریف مشکل اصلی، ریشه‌های کلیدی، اقدامات فوری، کوتاه‌مدت، میان‌مدت، پیشگیرانه، اولویت‌بندی (High/Medium/Low)، مسئول، زمان‌بندی، منابع، اثر بر زمان/هزینه/کیفیت، شاخص‌های پایش، معیار موفقیت، برنامه گزارش‌دهی
+
+در پایان جدول Action Tracker استاندارد ارائه کن.`
+    },
+  ],
+
+  fin: [
+    {
+      id: 'fin1', title: 'تدوین بودجه (Budget Preparation)',
+      text: `در نقش مدیر مالی (Finance Manager)، تحلیلگر برنامه‌ریزی مالی و متخصص بودجه‌ریزی سازمانی عمل کن.
+
+برای واحد یا پروژه زیر یک بودجه جامع طراحی کن.
+
+نام واحد/پروژه: [نام]
+دوره زمانی: [ماه/سال یا سال مالی]
+هزینه‌های گذشته: [داده‌ها]
+برنامه‌ها و فعالیت‌های آتی: [برنامه‌ها]
+محدودیت‌های مالی: [محدودیت‌ها]
+
+خروجی: خلاصه بودجه، دسته‌بندی هزینه‌ها (پرسنلی، عملیاتی، CAPEX، OPEX، غیرمستقیم)، برآورد هر بخش، فرضیات، سناریوها (محافظه‌کارانه/واقع‌بینانه/توسعه‌ای)، ریسک‌های مالی، نقاط حساس، شاخص‌های کنترل، بهینه‌سازی هزینه، پیش‌بینی جریان نقدی
+
+در پایان جدول بودجه قابل انتقال به Excel ارائه کن.`
+    },
+    {
+      id: 'fin2', title: 'تحلیل انحراف بودجه (Budget Variance Analysis)',
+      text: `در نقش کنترلر مالی (Financial Controller) و تحلیلگر بودجه عمل کن.
+
+برای داده‌های زیر تحلیل انحراف بودجه انجام بده.
+
+بودجه مصوب: [Budget]
+هزینه واقعی: [Actual Cost]
+جزئیات هزینه‌ها: [Breakdown]
+دوره زمانی: [Period]
+
+خروجی: محاسبه انحراف کل، انحراف هر دسته، درصد انحراف، تفکیک (قابل کنترل/غیرقابل کنترل)، دلایل (افزایش قیمت، تغییر دامنه، خطای برآورد، بهره‌وری پایین، هزینه پیش‌بینی‌نشده)، اثر انحراف، تحلیل روند، شاخص‌های کلیدی (Cost Variance، Budget Utilization Rate، Cost Efficiency Ratio)، اقدامات اصلاحی، پیشنهاد بازنگری بودجه
+
+در پایان گزارش مدیریتی خلاصه برای تصمیم‌گیری ارائه کن.`
+    },
+    {
+      id: 'fin3', title: 'پیش‌بینی مالی (Financial Forecasting)',
+      text: `در نقش تحلیلگر مالی ارشد (Senior Financial Analyst) و متخصص پیش‌بینی مالی عمل کن.
+
+برای داده‌های زیر یک پیش‌بینی مالی دقیق انجام بده.
+
+داده‌های مالی گذشته: [داده‌ها]
+روند هزینه‌ها: [روند]
+روند درآمد: [درآمد]
+برنامه‌های آینده: [برنامه‌ها]
+سناریوهای اقتصادی: [شرایط]
+
+خروجی: تحلیل روند تاریخی، مدل پیش‌بینی هزینه/درآمد، سه سناریو (بدبینانه/واقع‌بینانه/خوش‌بینانه)، عوامل مؤثر، پیش‌بینی جریان نقدی، نقاط ریسک، شاخص‌های پایداری، تحلیل شکاف، پیشنهاد مدیریت هزینه، توصیه‌های استراتژیک
+
+در پایان جدول Forecast قابل استفاده در Excel ارائه کن.`
+    },
+    {
+      id: 'fin4', title: 'تحلیل صورت‌های مالی (Financial Statement Analysis)',
+      text: `در نقش تحلیلگر ارشد مالی و متخصص تحلیل صورت‌های مالی عمل کن.
+
+صورت‌های مالی زیر را تحلیل کن.
+
+صورت سود و زیان: [Income Statement]
+ترازنامه: [Balance Sheet]
+صورت جریان وجوه نقد: [Cash Flow Statement]
+دوره مالی: [دوره زمانی]
+
+خروجی: تحلیل ساختار درآمد و هزینه، سودآوری (Gross/Operating/Net Profit Margin)، ساختار دارایی‌ها و بدهی‌ها، نقدینگی (Current Ratio، Quick Ratio، Cash Position)، اهرم مالی (Debt Ratio، D/E)، کارایی (Asset Turnover)، نقاط قوت و ضعف مالی، روند تغییرات، هشدارهای مالی (Red Flags)، جمع‌بندی مدیریتی
+
+در پایان جدول خلاصه شاخص‌های مالی ارائه کن.`
+    },
+    {
+      id: 'fin5', title: 'تحلیل جریان نقدی (Cash Flow Analysis)',
+      text: `در نقش تحلیلگر مالی و متخصص مدیریت نقدینگی عمل کن.
+
+صورت جریان وجوه نقد زیر را تحلیل کن.
+
+جریان نقدی عملیاتی: [Operating Cash Flow]
+جریان نقدی سرمایه‌گذاری: [Investing Cash Flow]
+جریان نقدی تأمین مالی: [Financing Cash Flow]
+دوره زمانی: [Period]
+
+خروجی: تحلیل جریان نقدی عملیاتی، توان تولید نقدینگی، وابستگی به تأمین مالی خارجی، پایداری جریان نقدی، تحلیل سرمایه‌گذاری‌ها، ساختار تأمین مالی، وضعیت نقدینگی (Liquidity Position)، ریسک‌های نقدینگی، هشدارها، پیش‌بینی آینده، توصیه‌های مدیریتی
+
+در پایان جدول خلاصه جریان‌های نقدی ارائه کن.`
+    },
+    {
+      id: 'fin6', title: 'تحلیل سرمایه‌گذاری (Investment Analysis)',
+      text: `در نقش تحلیلگر سرمایه‌گذاری (Investment Analyst) و مشاور مالی ارشد عمل کن.
+
+فرصت سرمایه‌گذاری زیر را تحلیل کن.
+
+شرح پروژه/سرمایه‌گذاری: [شرح]
+هزینه اولیه: [CAPEX]
+جریان‌های نقدی مورد انتظار: [Cash Flows]
+دوره زمانی: [Horizon]
+نرخ تنزیل: [Discount Rate]
+ریسک‌ها: [Risks]
+
+خروجی: تحلیل اقتصادی، NPV، IRR، Payback Period، تحلیل حساسیت، ریسک سرمایه‌گذاری، مقایسه با گزینه‌های جایگزین، سناریوهای بدبینانه/واقع‌بینانه/خوش‌بینانه، جذابیت سرمایه‌گذاری، Break-even Analysis، ریسک‌های کلیدی، توصیه نهایی (سرمایه‌گذاری شود / بررسی بیشتر / عدم توصیه)
+
+در پایان جدول خلاصه شاخص‌های مالی ارائه کن.`
+    },
+  ],
+
+  letters: [
+    {
+      id: 'let1', title: 'نامه اداری رسمی (درخواست / اطلاع‌رسانی / پاسخ)',
+      text: `در نقش یک کارشناس ارشد مکاتبات اداری و دبیرخانه سازمانی عمل کن.
+
+یک نامه رسمی اداری بر اساس اطلاعات زیر تنظیم کن.
+
+نوع نامه: [درخواست / اطلاع‌رسانی / پاسخ]
+موضوع نامه: [موضوع]
+گیرنده: [نام و سمت گیرنده]
+فرستنده: [نام و سمت]
+متن یا درخواست اصلی: [شرح موضوع]
+هدف نامه: [هدف]
+نکات مهم: [نکات]
+
+خروجی باید شامل:
+1- عنوان نامه
+2- متن مقدمه رسمی
+3- بدنه اصلی (شفاف، دقیق، بدون ابهام)
+4- جمع‌بندی یا درخواست نهایی
+5- عبارت پایانی رسمی
+
+نامه باید کاملاً رسمی، اداری و قابل ثبت در دبیرخانه سازمان باشد.`
+    },
+    {
+      id: 'let2', title: 'نامه ارجاع (Referral Letter)',
+      text: `در نقش مسئول دبیرخانه و کارشناس ارجاع مکاتبات عمل کن.
+
+یک نامه ارجاع رسمی تنظیم کن.
+
+موضوع مکاتبه: [موضوع]
+نامه یا درخواست اولیه: [شرح]
+واحد یا شخص مقصد: [واحد مقصد]
+دلیل ارجاع: [دلیل]
+اقدام مورد انتظار: [اقدام]
+
+خروجی شامل:
+1- عنوان نامه ارجاع
+2- متن ارجاع رسمی
+3- توضیح مختصر موضوع برای واحد مقصد
+4- درخواست اقدام مشخص
+5- تأکید بر فوریت یا اهمیت (در صورت نیاز)
+6- جمله پایانی اداری
+
+نامه باید کوتاه، دقیق و کاملاً قابل ثبت در اتوماسیون اداری باشد.`
+    },
+    {
+      id: 'let3', title: 'نامه داخلی بین واحدها (Internal Memo)',
+      text: `در نقش دبیر کمیته مکاتبات داخلی سازمان عمل کن.
+
+یک نامه داخلی بین واحدها تنظیم کن.
+
+واحد ارسال‌کننده: [واحد]
+واحد گیرنده: [واحد]
+موضوع: [موضوع]
+شرح موضوع: [توضیح]
+درخواست یا اقدام مورد انتظار: [اقدام]
+
+خروجی شامل:
+1- عنوان نامه داخلی
+2- متن رسمی و مختصر
+3- توضیح موضوع به زبان ساده و شفاف
+4- درخواست اقدام یا همکاری
+5- زمان مورد انتظار پاسخ (در صورت وجود)
+6- عبارت پایانی رسمی
+
+نامه باید کوتاه، دقیق و بدون حاشیه باشد.`
+    },
+    {
+      id: 'let4', title: 'نامه ابلاغ (Notification / Instruction Letter)',
+      text: `در نقش مقام اداری یا دبیر هیئت اجرایی سازمان عمل کن.
+
+یک نامه ابلاغ رسمی تنظیم کن.
+
+موضوع ابلاغ: [موضوع]
+محتوای تصمیم یا دستور: [تصمیم]
+مخاطب: [گیرنده]
+تاریخ اجرا: [تاریخ]
+دامنه اجرا: [واحدها یا افراد]
+
+خروجی شامل:
+1- عنوان نامه ابلاغ
+2- مقدمه رسمی و اشاره به تصمیم
+3- متن کامل ابلاغ
+4- توضیح نحوه اجرا
+5- تاریخ و الزامات اجرایی
+6- پیامد عدم اجرا (در صورت نیاز)
+7- عبارت پایانی رسمی`
+    },
+    {
+      id: 'let5', title: 'نامه پیگیری امور (Follow-up Letter)',
+      text: `در نقش کارشناس دبیرخانه و پیگیری مکاتبات سازمانی عمل کن.
+
+یک نامه پیگیری رسمی تنظیم کن.
+
+موضوع: [موضوع]
+نامه یا درخواست قبلی: [ارجاع یا شرح]
+تاریخ ارسال قبلی: [تاریخ]
+گیرنده: [نام و سمت]
+وضعیت فعلی: [در انتظار / تأخیر / نیاز به پاسخ]
+
+خروجی شامل:
+1- عنوان نامه پیگیری
+2- اشاره به مکاتبه قبلی
+3- یادآوری موضوع
+4- درخواست وضعیت یا اقدام
+5- تأکید بر اهمیت موضوع
+6- جمله پایانی محترمانه
+
+نامه باید کاملاً حرفه‌ای، غیرتهاجمی و پیگیرانه باشد.`
+    },
+    {
+      id: 'let6', title: 'نامه گزارش مدیریتی به مدیرعامل (Executive Report Letter)',
+      text: `در نقش دبیر مدیرعامل، مدیر ارشد گزارش‌دهی و تحلیلگر تصمیم‌سازی سازمانی عمل کن.
+
+یک نامه گزارش مدیریتی برای مدیرعامل تنظیم کن.
+
+موضوع گزارش: [موضوع]
+بازه زمانی: [بازه زمانی]
+واحد گزارش‌دهنده: [واحد]
+خلاصه داده‌ها: [داده‌ها]
+مسائل کلیدی: [مشکلات]
+اقدامات انجام‌شده: [اقدامات]
+
+خروجی باید شامل:
+1- عنوان نامه
+2- خلاصه مدیریتی (Executive Summary در ۵ تا ۷ خط)
+3- وضعیت فعلی (Current Status)
+4- شاخص‌های کلیدی عملکرد
+5- ریسک‌های کلیدی
+6- انحرافات مهم
+7- اقدامات اصلاحی پیشنهادی
+8- تصمیمات مورد نیاز از مدیرعامل
+9- جمع‌بندی نهایی تصمیم‌محور`
+    },
+    {
+      id: 'let7', title: 'نامه درخواست تصمیم از مدیرعامل (Decision Request)',
+      text: `در نقش مدیر دبیرخانه مدیرعامل و تحلیلگر تصمیم‌سازی عمل کن.
+
+یک نامه رسمی برای اخذ تصمیم از مدیرعامل تنظیم کن.
+
+موضوع تصمیم: [موضوع]
+پس‌زمینه: [توضیح مسئله]
+گزینه‌های موجود: [گزینه‌ها]
+مزایا و معایب هر گزینه: [تحلیل]
+ریسک‌ها: [ریسک‌ها]
+
+خروجی شامل:
+1- عنوان نامه
+2- شرح مسئله به‌صورت خلاصه
+3- گزینه‌های پیشنهادی (حداکثر ۳ گزینه)
+4- تحلیل مزایا و معایب هر گزینه
+5- تحلیل ریسک هر گزینه
+6- پیشنهاد نهایی واحد
+7- دلایل انتخاب گزینه پیشنهادی
+8- درخواست تصمیم صریح از مدیرعامل
+
+نامه باید کاملاً تصمیم‌محور و بدون ابهام باشد.`
+    },
+    {
+      id: 'let8', title: 'نامه ابلاغ تصمیم مدیرعامل (CEO Directive)',
+      text: `در نقش دبیر هیئت‌مدیره و دفتر مدیرعامل عمل کن.
+
+یک نامه ابلاغ رسمی بر اساس تصمیم مدیرعامل تنظیم کن.
+
+موضوع تصمیم: [موضوع]
+متن تصمیم مدیرعامل: [تصمیم]
+دامنه اجرا: [واحدها]
+تاریخ اجرا: [تاریخ]
+
+خروجی شامل:
+1- عنوان نامه ابلاغ
+2- مقدمه رسمی با اشاره به تصمیم مدیرعامل
+3- متن دقیق ابلاغ
+4- شرح نحوه اجرا
+5- مسئول اجرا
+6- زمان‌بندی اجرا
+7- الزامات گزارش‌دهی
+8- پیامد عدم اجرا (در صورت نیاز)
+
+نامه باید کاملاً رسمی، غیرقابل تفسیر و قابل اجرا باشد.`
+    },
+    {
+      id: 'let9', title: 'نامه خلاصه وضعیت پروژه‌ها (Portfolio Status Report)',
+      text: `در نقش مدیر PMO و تهیه‌کننده گزارش سطح هیئت‌مدیره عمل کن.
+
+خلاصه وضعیت پروژه‌های سازمان را برای مدیرعامل تهیه کن.
+
+فهرست پروژه‌ها: [نام پروژه‌ها]
+وضعیت هر پروژه: [وضعیت]
+ریسک‌ها: [ریسک‌ها]
+بودجه: [بودجه]
+
+خروجی شامل:
+1- خلاصه وضعیت کل پورتفولیو
+2- طبقه‌بندی پروژه‌ها (سبز / زرد / قرمز)
+3- پروژه‌های بحرانی
+4- دلایل وضعیت بحرانی
+5- ریسک‌های کلان سازمانی
+6- اثر پروژه‌ها بر اهداف سازمان
+7- نیاز به تصمیم مدیرعامل
+8- پیشنهادات اصلاحی
+9- جمع‌بندی اجرایی در ۵ خط`
+    },
+    {
+      id: 'let10', title: 'نامه پیشنهاد استراتژیک (Strategic Proposal)',
+      text: `در نقش مشاور استراتژی سازمان و دبیر مدیرعامل عمل کن.
+
+یک نامه پیشنهاد استراتژیک برای مدیرعامل تنظیم کن.
+
+موضوع استراتژیک: [موضوع]
+وضعیت فعلی: [وضعیت]
+فرصت‌ها: [فرصت‌ها]
+تهدیدها: [تهدیدها]
+منابع مورد نیاز: [منابع]
+
+خروجی شامل:
+1- عنوان نامه
+2- تحلیل وضعیت فعلی
+3- فرصت‌های کلیدی
+4- تهدیدها و ریسک‌ها
+5- گزینه‌های استراتژیک
+6- پیشنهاد نهایی
+7- اثرات مورد انتظار (Impact)
+8- درخواست تصمیم یا تأیید مدیرعامل`
+    },
+    {
+      id: 'let11', title: 'نامه جمع‌بندی جلسه مدیرعامل (CEO Meeting Minutes)',
+      text: `در نقش دبیر جلسه مدیرعامل و هیئت‌مدیره عمل کن.
+
+خلاصه رسمی جلسه زیر را تهیه کن.
+
+تاریخ جلسه: [تاریخ]
+حاضرین: [افراد]
+موضوعات مطرح‌شده: [موضوعات]
+تصمیمات اتخاذشده: [تصمیمات]
+اقدامات پیگیری: [Action Items]
+
+خروجی شامل:
+1- عنوان جلسه
+2- خلاصه اجرایی جلسه
+3- تصمیمات نهایی
+4- اقدامات و مسئولین
+5- مهلت‌های زمانی
+6- موضوعات باز برای جلسه بعد
+7- ریسک‌های مطرح‌شده
+8- جمع‌بندی نهایی
+
+خروجی باید رسمی، دقیق و قابل آرشیو در دفتر مدیرعامل باشد.`
+    },
+  ],
+
+  minutes: [
+    {
+      id: 'min1', title: 'تهیه صورتجلسه رسمی',
+      text: `در نقش دبیر جلسه و مسئول تنظیم صورتجلسه‌های رسمی سازمانی عمل کن.
+
+بر اساس اطلاعات زیر، صورتجلسه رسمی را در قالب استاندارد شرکت بانیان صنعت پرشین تنظیم کن.
+
+اطلاعات جلسه:
+- عنوان جلسه: [عنوان جلسه]
+- تاریخ برگزاری: [تاریخ]
+- محل برگزاری: [مکان]
+- شماره صورتجلسه: [شماره]
+- رئیس جلسه / دبیر جلسه: [نام و سمت]
+
+حاضرین در جلسه:
+[نام و سمت هر نفر را به ترتیب وارد کنید]
+
+موضوعات بررسی‌شده در جلسه:
+[خلاصه بحث‌ها و گفتگوها]
+
+مصوبات و تصمیمات:
+[تصمیمات اتخاذشده، مسئول پیگیری و زمان‌بندی اجرا]
+
+خروجی باید در قالب زیر باشد:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+عنوان جلسه:                    تاریخ برگزاری:
+محل برگزاری:                   شماره صورت‌جلسه:
+رئیس جلسه / دبیر جلسه:
+━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+حاضرین در جلسه:
+نام و نام خانوادگی | سمت سازمانی
+────────────────────────────
+
+مصوبات و تصمیمات جلسه:
+ردیف | موضوع مصوبه | تصمیم اتخاذشده | مسئول پیگیری | زمان‌بندی اجرا
+────────────────────────────
+
+صورتجلسه باید رسمی، دقیق، بدون ابهام و قابل امضا و آرشیو باشد.`
+    },
+  ],
+};
+
+// =============================================
+// STATE
+// =============================================
+let unlockedUnits = new Set(['letters', 'minutes']);
+let currentUnitId = null;
+let adminOpen = false;
+let adminUnlocked = false;
+
+// =============================================
+// RENDER SECTIONS
+// =============================================
+function renderSections() {
+  const grid = document.getElementById('sectionsGrid');
+  grid.innerHTML = '';
+  UNITS.forEach(unit => {
+    const promptCount = (PROMPTS[unit.id] || []).length;
+    const card = document.createElement('div');
+    card.className = 'unit-card';
+    card.onclick = () => openUnit(unit.id);
+    card.innerHTML = `
+      <div class="unit-card-header">
+        <div class="unit-icon" style="background:${unit.bg}">${unit.icon}</div>
+        <div class="unit-card-info">
+          <h2>${unit.name}</h2>
+          <p>${promptCount} پرامپت موجود</p>
+        </div>
+      </div>
+      <div class="unit-card-footer">
+        <span class="prompt-count">${promptCount} پرامپت</span>
+        ${unit.isPublic
+          ? `<span class="public-badge">🌐 دسترسی آزاد</span>`
+          : `<div style="display:flex;align-items:center;gap:10px">
+              <span class="lock-icon">🔒</span>
+              <button class="unlock-btn" onclick="event.stopPropagation(); openUnit('${unit.id}')">ورود</button>
+             </div>`
+        }
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// =============================================
+// OPEN UNIT
+// =============================================
+function openUnit(unitId) {
+  currentUnitId = unitId;
+  const unit = UNITS.find(u => u.id === unitId);
+  if (!unit) return;
+
+  if (unit.isPublic || unlockedUnits.has(unitId)) {
+    showDetailModal(unitId);
+  } else {
+    showPasswordModal(unitId);
+  }
+}
+
+// =============================================
+// PASSWORD MODAL
+// =============================================
+function showPasswordModal(unitId) {
+  const unit = UNITS.find(u => u.id === unitId);
+  document.getElementById('pwModalTitle').textContent = unit.name;
+  document.getElementById('pwModalSub').textContent = `برای دسترسی به پرامپت‌های «${unit.name}» رمز عبور را وارد کنید.`;
+  document.getElementById('pwInput').value = '';
+  document.getElementById('pwError').classList.remove('show');
+  document.getElementById('passwordModal').classList.add('active');
+  setTimeout(() => document.getElementById('pwInput').focus(), 100);
+}
+
+function closePasswordModal() {
+  document.getElementById('passwordModal').classList.remove('active');
+  currentUnitId = null;
+}
+
+function togglePw() {
+  const inp = document.getElementById('pwInput');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+}
+
+function checkPassword() {
+  if (!currentUnitId) return;
+  const unit = UNITS.find(u => u.id === currentUnitId);
+  const val = document.getElementById('pwInput').value;
+  if (val === unit.password) {
+    unlockedUnits.add(currentUnitId);
+    document.getElementById('passwordModal').classList.remove('active');
+    showDetailModal(currentUnitId);
+  } else {
+    document.getElementById('pwError').classList.add('show');
+    document.getElementById('pwInput').value = '';
+    document.getElementById('pwInput').focus();
+  }
+}
+
+// =============================================
+// DETAIL MODAL
+// =============================================
+function showDetailModal(unitId) {
+  const unit = UNITS.find(u => u.id === unitId);
+  const prompts = PROMPTS[unitId] || [];
+
+  document.getElementById('detailIcon').textContent = unit.icon;
+  document.getElementById('detailIcon').style.background = unit.bg;
+  document.getElementById('detailTitle').textContent = unit.name;
+  document.getElementById('detailSub').textContent = `${prompts.length} پرامپت موجود`;
+
+  const list = document.getElementById('promptsList');
+  list.innerHTML = '';
+
+  if (prompts.length === 0) {
+    list.innerHTML = '<div style="text-align:center;padding:48px;color:var(--text-light);font-size:0.9rem;">هنوز پرامپتی برای این واحد ثبت نشده است.</div>';
+  } else {
+    prompts.forEach((p, i) => {
+      const item = document.createElement('div');
+      item.className = 'prompt-item';
+      item.innerHTML = `
+        <div class="prompt-item-header" onclick="togglePrompt(this)" id="ph-${p.id}">
+          <div class="prompt-num">${i+1}</div>
+          <div class="prompt-title">${p.title}</div>
+          <span class="chevron">▼</span>
+        </div>
+        <div class="prompt-body" id="pb-${p.id}">
+          <div class="prompt-text" id="pt-${p.id}">${p.text}</div>
+          <button class="copy-btn" id="cb-${p.id}" onclick="copyPrompt('${p.id}')">📋 کپی پرامپت</button>
+        </div>
+      `;
+      list.appendChild(item);
+    });
+  }
+
+  document.getElementById('detailModal').classList.add('active');
+}
+
+function closeDetailModal() {
+  document.getElementById('detailModal').classList.remove('active');
+}
+
+function togglePrompt(header) {
+  const id = header.id.replace('ph-', '');
+  const body = document.getElementById('pb-' + id);
+  const chevron = header.querySelector('.chevron');
+  const isOpen = body.classList.contains('show');
+  body.classList.toggle('show', !isOpen);
+  header.classList.toggle('expanded', !isOpen);
+  chevron.classList.toggle('open', !isOpen);
+}
+
+function copyPrompt(id) {
+  const el = document.getElementById('pt-' + id);
+  const btn = document.getElementById('cb-' + id);
+  if (!el) return;
+  navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+    btn.textContent = '✅ کپی شد!';
+    btn.classList.add('copied');
+    showToast('پرامپت با موفقیت کپی شد! ✅');
+    setTimeout(() => {
+      btn.textContent = '📋 کپی پرامپت';
+      btn.classList.remove('copied');
+    }, 2500);
+  });
+}
+
+// =============================================
+// ADMIN PANEL
+// =============================================
+function toggleAdmin() {
+  if (!adminUnlocked) {
+    document.getElementById('adminCodeInput').value = '';
+    document.getElementById('adminCodeError').classList.remove('show');
+    document.getElementById('adminCodeModal').classList.add('active');
+    setTimeout(() => document.getElementById('adminCodeInput').focus(), 100);
+    return;
+  }
+  adminOpen = !adminOpen;
+  document.getElementById('adminPanel').classList.toggle('open', adminOpen);
+  if (adminOpen) renderManageList();
+}
+
+function checkAdminCode() {
+  const val = document.getElementById('adminCodeInput').value;
+  if (val === '2361') {
+    adminUnlocked = true;
+    document.getElementById('adminCodeModal').classList.remove('active');
+    adminOpen = true;
+    document.getElementById('adminPanel').classList.add('open');
+    renderManageList();
+    showToast('✅ دسترسی مدیریت فعال شد!');
+  } else {
+    document.getElementById('adminCodeError').classList.add('show');
+    document.getElementById('adminCodeInput').value = '';
+    document.getElementById('adminCodeInput').focus();
+  }
+}
+
+function closeAdminCodeModal() {
+  document.getElementById('adminCodeModal').classList.remove('active');
+}
+
+function toggleAdminPw() {
+  const inp = document.getElementById('adminCodeInput');
+  inp.type = inp.type === 'password' ? 'text' : 'password';
+}
+
+function populateUnitSelects() {
+  const selects = ['addUnitSelect', 'deleteUnitFilter'];
+  selects.forEach(sid => {
+    const sel = document.getElementById(sid);
+    if (!sel) return;
+    sel.innerHTML = '';
+    if (sid === 'deleteUnitFilter') {
+      const allOpt = document.createElement('option');
+      allOpt.value = '__all'; allOpt.textContent = 'همه واحدها';
+      sel.appendChild(allOpt);
+    }
+    UNITS.forEach(u => {
+      const opt = document.createElement('option');
+      opt.value = u.id; opt.textContent = u.name;
+      sel.appendChild(opt);
+    });
+  });
+}
+
+function addPrompt() {
+  const unitId = document.getElementById('addUnitSelect').value;
+  const title = document.getElementById('addPromptTitle').value.trim();
+  const text = document.getElementById('addPromptText').value.trim();
+
+  if (!unitId || !title || !text) {
+    showToast('⚠️ لطفاً همه فیلدها را پر کنید.');
+    return;
+  }
+
+  if (!PROMPTS[unitId]) PROMPTS[unitId] = [];
+  const newId = unitId + '_' + Date.now();
+  PROMPTS[unitId].push({ id: newId, title, text });
+
+  document.getElementById('addPromptTitle').value = '';
+  document.getElementById('addPromptText').value = '';
+
+  const succ = document.getElementById('addSuccess');
+  succ.classList.add('show');
+  setTimeout(() => succ.classList.remove('show'), 3000);
+
+  renderSections();
+  renderManageList();
+  showToast('✅ پرامپت با موفقیت اضافه شد!');
+}
+
+function renderManageList() {
+  const filter = document.getElementById('deleteUnitFilter').value;
+  const list = document.getElementById('manageList');
+  list.innerHTML = '';
+
+  let items = [];
+  UNITS.forEach(u => {
+    if (filter !== '__all' && filter !== u.id) return;
+    (PROMPTS[u.id] || []).forEach(p => {
+      items.push({ unitId: u.id, unitName: u.name, prompt: p });
+    });
+  });
+
+  if (items.length === 0) {
+    list.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text-light);font-size:0.85rem;">پرامپتی یافت نشد.</div>';
+    return;
+  }
+
+  items.forEach(({ unitId, unitName, prompt }) => {
+    const item = document.createElement('div');
+    item.className = 'manage-item';
+    item.innerHTML = `
+      <span class="manage-item-title">${prompt.title}</span>
+      <span class="manage-item-unit">${unitName}</span>
+      <button class="btn-delete" onclick="deletePrompt('${unitId}','${prompt.id}')">🗑️ حذف</button>
+    `;
+    list.appendChild(item);
+  });
+}
+
+function deletePrompt(unitId, promptId) {
+  if (!confirm('آیا از حذف این پرامپت اطمینان دارید؟')) return;
+  PROMPTS[unitId] = (PROMPTS[unitId] || []).filter(p => p.id !== promptId);
+  renderSections();
+  renderManageList();
+  showToast('🗑️ پرامپت حذف شد.');
+}
+
+// =============================================
+// TOAST
+// =============================================
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// =============================================
+// CLOSE ON OVERLAY CLICK
+// =============================================
+document.getElementById('passwordModal').addEventListener('click', function(e) {
+  if (e.target === this) closePasswordModal();
+});
+document.getElementById('detailModal').addEventListener('click', function(e) {
+  if (e.target === this) closeDetailModal();
+});
+
+// =============================================
+// INIT
+// =============================================
+
+// =============================================
+// DATETIME
+// =============================================
+function updateDatetime() {
+  const now = new Date();
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const datePart = now.toLocaleDateString('fa-IR', options);
+  const timePart = now.toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  const el = document.getElementById('datetimeDisplay');
+  if (el) el.textContent = datePart + ' — ' + timePart;
+}
+updateDatetime();
+setInterval(updateDatetime, 1000);
+
+// =============================================
+// SCROLL HIGHLIGHT
+// =============================================
+function setupScrollHighlight() {
+  const cards = document.querySelectorAll('.unit-card');
+  if (!cards.length) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.remove('blink-highlight');
+        void entry.target.offsetWidth; // reflow to restart animation
+        entry.target.classList.add('blink-highlight');
+        setTimeout(() => entry.target.classList.remove('blink-highlight'), 1400);
+      }
+    });
+  }, { threshold: 0.4 });
+  cards.forEach(c => observer.observe(c));
+  
+  // Also trigger on mouseover for immediate feedback
+  cards.forEach(c => {
+    c.addEventListener('mouseenter', function() {
+      this.classList.remove('blink-highlight');
+      void this.offsetWidth;
+      this.classList.add('blink-highlight');
+      setTimeout(() => this.classList.remove('blink-highlight'), 1400);
+    });
+  });
+}
+
+// =============================================
+// FLOATING PARTICLES
+// =============================================
+function createParticles() {
+  for (let i = 0; i < 12; i++) {
+    setTimeout(() => {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      const size = Math.random() * 6 + 3;
+      p.style.cssText = `
+        width:${size}px;height:${size}px;
+        left:${Math.random()*100}vw;
+        bottom:0;
+        background:rgba(${Math.random()>0.5?'79,94,207':'124,142,245'},${Math.random()*0.4+0.1});
+        animation-duration:${Math.random()*15+10}s;
+        animation-delay:${Math.random()*8}s;
+      `;
+      document.body.appendChild(p);
+    }, i * 300);
+  }
+}
+createParticles();
+
+
+renderSections();
+populateUnitSelects();
+aiPopulateSelect();
+setupScrollHighlight();
+
+// ═══════════════════════════════════════════
+// SETTINGS PANEL
+// ═══════════════════════════════════════════
+let settingsUnlocked = false;
+let adminCode = localStorage.getItem('bsp_admin_code') || '2361';
+
+function openSettings() {
+  document.getElementById('settingsDrawer').classList.add('open');
+  document.getElementById('settingsOverlay').classList.add('open');
+  if (!settingsUnlocked) {
+    document.getElementById('settingsAuth').style.display = 'block';
+    document.getElementById('settingsMain').style.display = 'none';
+    setTimeout(() => document.getElementById('settingsCodeInput').focus(), 300);
+  }
+}
+
+function closeSettings() {
+  document.getElementById('settingsDrawer').classList.remove('open');
+  document.getElementById('settingsOverlay').classList.remove('open');
+}
+
+function checkSettingsCode() {
+  const val = document.getElementById('settingsCodeInput').value;
+  if (val === adminCode) {
+    settingsUnlocked = true;
+    document.getElementById('settingsCodeInput').value = '';
+    document.getElementById('settingsAuth').style.display = 'none';
+    document.getElementById('settingsMain').style.display = 'block';
+    renderSettingsUnitLists();
+    sToast('✅ خوش آمدید، مدیر سامانه');
+  } else {
+    document.getElementById('settingsCodeErr').textContent = '❌ کد اشتباه است';
+    document.getElementById('settingsCodeInput').value = '';
+    document.getElementById('settingsCodeInput').focus();
+    setTimeout(() => document.getElementById('settingsCodeErr').textContent = '', 2500);
+  }
+}
+
+function switchStab(btn, tabId) {
+  document.querySelectorAll('.stab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  ['stab-appearance','stab-passwords','stab-units','stab-access'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = id === tabId ? 'block' : 'none';
+  });
+}
+
+function sToast(msg) {
+  const t = document.getElementById('sToast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ── Appearance ──
+function applyColor(prop, val) {
+  document.documentElement.style.setProperty(prop, val);
+}
+function applyCSS(prop, val) {
+  document.documentElement.style.setProperty(prop, val);
+  const sm = prop === '--radius' ? parseInt(val) / 2 + 'px' : null;
+  if (sm) document.documentElement.style.setProperty('--radius-sm', sm);
+}
+function applyFont(val) {
+  document.body.style.fontFamily = val + ", sans-serif";
+}
+function applyFontSize(val) {
+  document.getElementById('fontSizeVal').textContent = val;
+  document.documentElement.style.fontSize = val + '%';
+}
+function saveAppearance() {
+  const s = {
+    accent: document.getElementById('set-accent').value,
+    accent2: document.getElementById('set-accent2').value,
+    bg: document.getElementById('set-bg').value,
+    font: document.getElementById('set-font').value,
+  };
+  localStorage.setItem('bsp_appearance', JSON.stringify(s));
+  sToast('✅ ظاهر ذخیره شد');
+}
+function resetAppearance() {
+  localStorage.removeItem('bsp_appearance');
+  sToast('✅ بازگشت به پیش‌فرض — صفحه دوباره بارگذاری می‌شود');
+  setTimeout(() => location.reload(), 1200);
+}
+function loadAppearance() {
+  const s = JSON.parse(localStorage.getItem('bsp_appearance') || '{}');
+  if (s.accent) { applyColor('--accent', s.accent); document.getElementById('set-accent').value = s.accent; }
+  if (s.accent2) { applyColor('--accent2', s.accent2); document.getElementById('set-accent2').value = s.accent2; }
+  if (s.bg) { applyColor('--bg', s.bg); document.getElementById('set-bg').value = s.bg; }
+  if (s.font) { applyFont(s.font); document.getElementById('set-font').value = s.font; }
+}
+
+// ── Passwords ──
+function changeUnitPassword() {
+  const sel = document.getElementById('pw-unit-select');
+  const newPw = document.getElementById('pw-new').value.trim();
+  if (!sel.value || !newPw) { sToast('⚠️ واحد و رمز را وارد کنید'); return; }
+  const unitId = sel.value;
+  const pwKey = 'bsp_pw_' + unitId;
+  localStorage.setItem(pwKey, newPw);
+  document.getElementById('pw-new').value = '';
+  sToast('✅ رمز واحد به‌روزرسانی شد');
+  renderSettingsUnitLists();
+}
+
+function changeAdminPassword() {
+  const n = document.getElementById('admin-pw-new').value.trim();
+  const r = document.getElementById('admin-pw-repeat').value.trim();
+  if (!n) { sToast('⚠️ رمز جدید را وارد کنید'); return; }
+  if (n !== r) { sToast('❌ رمزها یکسان نیستند'); return; }
+  adminCode = n;
+  localStorage.setItem('bsp_admin_code', n);
+  document.getElementById('admin-pw-new').value = '';
+  document.getElementById('admin-pw-repeat').value = '';
+  sToast('✅ رمز مدیر تغییر کرد');
+}
+
+// ── Units ──
+function renderSettingsUnitLists() {
+  const lists = ['adminUnitList','pwUnitList','accessUnitList'];
+  lists.forEach(lid => {
+    const el = document.getElementById(lid);
+    if (!el) return;
+    el.innerHTML = UNITS.map(u => `
+      <div class="unit-admin-row">
+        <span>${u.icon || '📁'} ${u.name}</span>
+        ${u.locked ? '<span class="unit-lock-badge">🔒 قفل</span>' : '<span class="unit-lock-badge" style="background:rgba(61,214,163,0.1);color:#2a9d8f">🔓 باز</span>'}
+        ${lid === 'adminUnitList' ? `<button class="sbtn sbtn-danger" style="width:auto;padding:3px 10px;font-size:0.7rem;margin:0" onclick="removeUnit('${u.id}')">حذف</button>` : ''}
+      </div>
+    `).join('');
+  });
+  // populate pw select
+  const sel = document.getElementById('pw-unit-select');
+  if (sel) {
+    sel.innerHTML = UNITS.map(u => `<option value="${u.id}">${u.name}</option>`).join('');
+  }
+}
+
+function addNewUnit() {
+  const name = document.getElementById('new-unit-name').value.trim();
+  const icon = document.getElementById('new-unit-icon').value.trim() || '📁';
+  const pw = document.getElementById('new-unit-pw').value.trim();
+  if (!name) { sToast('⚠️ نام واحد را وارد کنید'); return; }
+  const id = 'unit_' + Date.now();
+  UNITS.push({ id, name, icon, locked: !!pw });
+  PROMPTS[id] = [];
+  if (pw) localStorage.setItem('bsp_pw_' + id, pw);
+  document.getElementById('new-unit-name').value = '';
+  document.getElementById('new-unit-icon').value = '';
+  document.getElementById('new-unit-pw').value = '';
+  renderSections();
+  renderSettingsUnitLists();
+  sToast('✅ واحد «' + name + '» اضافه شد');
+}
+
+function removeUnit(id) {
+  if (!confirm('آیا از حذف این واحد اطمینان دارید؟')) return;
+  const idx = UNITS.findIndex(u => u.id === id);
+  if (idx !== -1) UNITS.splice(idx, 1);
+  delete PROMPTS[id];
+  renderSections();
+  renderSettingsUnitLists();
+  sToast('✅ واحد حذف شد');
+}
+
+// ── Access ──
+function saveAccess() {
+  sToast('✅ تنظیمات دسترسی ذخیره شد');
+}
+
+// Init
+loadAppearance();
+
+
+// ═══════════════════════════════════════════
+// AI ASSISTANT (Claude via Anthropic API)
+// ═══════════════════════════════════════════
+let aiMessages = [];
+let aiTyping = false;
+
+function aiPopulateSelect() {
+  const sel = document.getElementById('aiPromptSelect');
+  if (!sel) return;
+  sel.innerHTML = '<option value="">— پرامپت از بانک انتخاب کنید —</option>';
+  UNITS.forEach(u => {
+    const grp = document.createElement('optgroup');
+    grp.label = (u.icon || '') + ' ' + u.name;
+    (PROMPTS[u.id] || []).forEach(p => {
+      const opt = document.createElement('option');
+      opt.value = JSON.stringify({ text: p.text, title: p.title });
+      opt.textContent = p.title;
+      grp.appendChild(opt);
+    });
+    if ((PROMPTS[u.id] || []).length) sel.appendChild(grp);
+  });
+}
+
+function aiLoadPrompt() {
+  const sel = document.getElementById('aiPromptSelect');
+  if (!sel.value) { showToast('⚠️ ابتدا یک پرامپت انتخاب کنید'); return; }
+  try {
+    const { text, title } = JSON.parse(sel.value);
+    document.getElementById('aiInput').value = text;
+    document.getElementById('aiInput').focus();
+    showToast('✅ پرامپت «' + title + '» بارگذاری شد');
+  } catch(e) {}
+}
+
+function aiHandleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); aiSend(); }
+}
+
+function aiAddMsg(role, text) {
+  const empty = document.getElementById('aiEmpty');
+  if (empty) empty.remove();
+  const chat = document.getElementById('aiChat');
+  const isUser = role === 'user';
+  const div = document.createElement('div');
+  div.className = 'ai-msg ' + (isUser ? 'user' : 'bot');
+  const safe = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  div.innerHTML = `
+    <div class="ai-avatar">${isUser ? '👤' : '🤖'}</div>
+    <div class="ai-bubble">${safe}</div>
+  `;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function aiShowTyping() {
+  const chat = document.getElementById('aiChat');
+  const empty = document.getElementById('aiEmpty');
+  if (empty) empty.remove();
+  const div = document.createElement('div');
+  div.className = 'ai-msg bot'; div.id = 'aiTypingMsg';
+  div.innerHTML = '<div class="ai-avatar">🤖</div><div class="ai-bubble"><div class="ai-typing"><span></span><span></span><span></span></div></div>';
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function aiRemoveTyping() {
+  const el = document.getElementById('aiTypingMsg');
+  if (el) el.remove();
+}
+
+async function aiSend() {
+  if (aiTyping) return;
+  const inp = document.getElementById('aiInput');
+  const text = inp.value.trim();
+  if (!text) return;
+  inp.value = '';
+  aiTyping = true;
+  document.getElementById('aiSendBtn').disabled = true;
+
+  aiMessages.push({ role: 'user', content: text });
+  aiAddMsg('user', text);
+  aiShowTyping();
+
+  try {
+    // Groq — رایگان و سریع
+    const GROQ_KEY = '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';
+    const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + GROQ_KEY
+      },
+      body: JSON.stringify({
+        model: 'llama-3.3-70b-versatile',
+        max_tokens: 1500,
+        messages: [
+          { role: 'system', content: 'شما یک دستیار سازمانی هوشمند برای شرکت بانیان صنعت پرشین هستید. پاسخ‌های دقیق، حرفه‌ای و کاربردی به فارسی ارائه دهید. اگر پرامپتی دریافت کردید، آن را اجرا کنید و خروجی مناسب تولید کنید.' },
+          ...aiMessages
+        ]
+      })
+    });
+    const data = await res.json();
+    aiRemoveTyping();
+    if (data.error) {
+      aiAddMsg('bot', '⚠️ ' + (data.error.message || 'خطایی رخ داد'));
+    } else {
+      const reply = data.choices?.[0]?.message?.content || '(پاسخی دریافت نشد)';
+      aiMessages.push({ role: 'assistant', content: reply });
+      aiAddMsg('bot', reply);
+    }
+  } catch(e) {
+    aiRemoveTyping();
+    aiAddMsg('bot', '⚠️ خطا در اتصال. لطفاً اتصال اینترنت را بررسی کنید.');
+  } finally {
+    aiTyping = false;
+    document.getElementById('aiSendBtn').disabled = false;
+  }
+}
+
+function aiClear() {
+  aiMessages = [];
+  const chat = document.getElementById('aiChat');
+  chat.innerHTML = '<div class="ai-empty" id="aiEmpty"><div class="ai-empty-icon">💬</div><p>یک پرامپت انتخاب کنید یا مستقیماً سوال بنویسید.<br>دستیار هوشمند پاسخ می‌دهد.</p></div>';
+}
+
+</script>
+
+<!-- SETTINGS FAB -->
+<button class="settings-fab" onclick="openSettings()" title="تنظیمات مدیر">⚙️</button>
+<div class="settings-toast" id="sToast"></div>
+
+<!-- SETTINGS OVERLAY -->
+<div class="settings-overlay" id="settingsOverlay" onclick="closeSettings()"></div>
+
+<!-- SETTINGS DRAWER -->
+<div class="settings-drawer" id="settingsDrawer">
+
+  <!-- AUTH GATE -->
+  <div id="settingsAuth">
+    <div class="settings-head">
+      <h3>⚙️ تنظیمات</h3>
+      <button class="settings-close" onclick="closeSettings()">✕</button>
+    </div>
+    <div class="settings-auth">
+      <div class="settings-auth-icon">🔐</div>
+      <h4>ورود مدیر</h4>
+      <p>برای دسترسی به تنظیمات، کد مدیریتی را وارد کنید.</p>
+      <div class="srow">
+        <input type="password" id="settingsCodeInput" placeholder="کد مدیریتی..." onkeydown="if(event.key==='Enter')checkSettingsCode()" style="text-align:center;font-size:1.1rem;letter-spacing:0.15em" />
+      </div>
+      <div style="color:var(--danger);font-size:0.78rem;margin-bottom:12px;min-height:18px" id="settingsCodeErr"></div>
+      <button class="sbtn sbtn-primary" onclick="checkSettingsCode()">ورود</button>
+    </div>
+  </div>
+
+  <!-- MAIN SETTINGS (hidden until auth) -->
+  <div id="settingsMain" style="display:none">
+    <div class="settings-head">
+      <h3>⚙️ تنظیمات سامانه</h3>
+      <button class="settings-close" onclick="closeSettings()">✕</button>
+    </div>
+
+    <div class="settings-tabs">
+      <button class="stab active" onclick="switchStab(this,'stab-appearance')">🎨 ظاهر</button>
+      <button class="stab" onclick="switchStab(this,'stab-passwords')">🔑 رمزها</button>
+      <button class="stab" onclick="switchStab(this,'stab-units')">🏢 واحدها</button>
+      <button class="stab" onclick="switchStab(this,'stab-access')">🛡 دسترسی</button>
+    </div>
+
+    <!-- TAB: APPEARANCE -->
+    <div class="settings-body" id="stab-appearance">
+      <div class="sgroup">
+        <div class="sgroup-title">رنگ‌ها</div>
+        <div class="srow">
+          <label>رنگ اصلی (Accent)</label>
+          <div class="srow-inline">
+            <input type="color" id="set-accent" value="#4f5ecf" oninput="applyColor('--accent',this.value);document.getElementById('set-accent-hex').value=this.value" />
+            <input type="text" id="set-accent-hex" value="#4f5ecf" placeholder="#4f5ecf" oninput="applyColor('--accent',this.value);document.getElementById('set-accent').value=this.value" />
+          </div>
+        </div>
+        <div class="srow">
+          <label>رنگ ثانویه</label>
+          <div class="srow-inline">
+            <input type="color" id="set-accent2" value="#7c8ef5" oninput="applyColor('--accent2',this.value)" />
+            <input type="text" value="#7c8ef5" placeholder="#7c8ef5" oninput="applyColor('--accent2',this.value)" />
+          </div>
+        </div>
+        <div class="srow">
+          <label>رنگ پس‌زمینه</label>
+          <div class="srow-inline">
+            <input type="color" id="set-bg" value="#aab4fa" oninput="applyColor('--bg',this.value)" />
+            <input type="text" value="#aab4fa" placeholder="#aab4fa" oninput="applyColor('--bg',this.value)" />
+          </div>
+        </div>
+      </div>
+
+      <div class="sgroup">
+        <div class="sgroup-title">تایپوگرافی</div>
+        <div class="srow">
+          <label>فونت</label>
+          <select id="set-font" onchange="applyFont(this.value)">
+            <option value="Vazirmatn">وزیرمتن (پیش‌فرض)</option>
+            <option value="Tahoma">Tahoma</option>
+            <option value="Arial">Arial</option>
+            <option value="Segoe UI">Segoe UI</option>
+          </select>
+        </div>
+        <div class="srow">
+          <label>اندازه متن: <span id="fontSizeVal">100</span>٪</label>
+          <input type="range" min="85" max="120" value="100" oninput="applyFontSize(this.value)" />
+        </div>
+      </div>
+
+      <div class="sgroup">
+        <div class="sgroup-title">چیدمان (Layout)</div>
+        <div class="srow">
+          <label>شعاع گوشه‌ها</label>
+          <select onchange="applyCSS('--radius',this.value)">
+            <option value="20px">گرد (پیش‌فرض)</option>
+            <option value="12px">نیمه‌گرد</option>
+            <option value="4px">تیز</option>
+          </select>
+        </div>
+        <div class="srow">
+          <label>ارتفاع هدر تصویر</label>
+          <select onchange="document.querySelector('.hero-banner').style.height=this.value">
+            <option value="260px">بلند</option>
+            <option value="200px">متوسط (پیش‌فرض)</option>
+            <option value="140px">کوتاه</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="sbtn sbtn-ghost" onclick="resetAppearance()">↺ بازگشت به حالت پیش‌فرض</button>
+      <button class="sbtn sbtn-primary" onclick="saveAppearance()">💾 ذخیره تنظیمات</button>
+    </div>
+
+    <!-- TAB: PASSWORDS -->
+    <div class="settings-body" id="stab-passwords" style="display:none">
+      <div class="sgroup">
+        <div class="sgroup-title">رمز ورود واحدها</div>
+        <div id="pwUnitList" class="unit-admin-list"></div>
+      </div>
+      <div class="sgroup">
+        <div class="sgroup-title">تغییر رمز واحد</div>
+        <div class="srow">
+          <label>واحد</label>
+          <select id="pw-unit-select"></select>
+        </div>
+        <div class="srow">
+          <label>رمز جدید</label>
+          <input type="password" id="pw-new" placeholder="رمز جدید..." />
+        </div>
+        <button class="sbtn sbtn-primary" onclick="changeUnitPassword()">🔑 ذخیره رمز</button>
+      </div>
+      <div class="sgroup">
+        <div class="sgroup-title">رمز مدیر سامانه</div>
+        <div class="srow">
+          <label>رمز جدید مدیر</label>
+          <input type="password" id="admin-pw-new" placeholder="رمز جدید مدیر..." />
+        </div>
+        <div class="srow">
+          <label>تکرار رمز</label>
+          <input type="password" id="admin-pw-repeat" placeholder="تکرار رمز..." />
+        </div>
+        <button class="sbtn sbtn-primary" onclick="changeAdminPassword()">🔐 ذخیره رمز مدیر</button>
+      </div>
+    </div>
+
+    <!-- TAB: UNITS -->
+    <div class="settings-body" id="stab-units" style="display:none">
+      <div class="sgroup">
+        <div class="sgroup-title">واحدهای فعلی</div>
+        <div id="adminUnitList" class="unit-admin-list"></div>
+      </div>
+      <div class="sgroup">
+        <div class="sgroup-title">افزودن واحد جدید</div>
+        <div class="srow">
+          <label>نام واحد</label>
+          <input type="text" id="new-unit-name" placeholder="مثال: واحد مالی" />
+        </div>
+        <div class="srow">
+          <label>آیکون</label>
+          <input type="text" id="new-unit-icon" placeholder="مثال: 💰" style="width:80px;text-align:center" />
+        </div>
+        <div class="srow">
+          <label>رمز (اختیاری)</label>
+          <input type="password" id="new-unit-pw" placeholder="اگر قفل می‌خواهد..." />
+        </div>
+        <button class="sbtn sbtn-primary" onclick="addNewUnit()">➕ افزودن واحد</button>
+      </div>
+    </div>
+
+    <!-- TAB: ACCESS -->
+    <div class="settings-body" id="stab-access" style="display:none">
+      <div class="sgroup">
+        <div class="sgroup-title">سطح دسترسی واحدها</div>
+        <div id="accessUnitList" class="unit-admin-list"></div>
+      </div>
+      <div class="sgroup">
+        <div class="sgroup-title">تنظیمات عمومی</div>
+        <div class="srow">
+          <label>اجازه کپی پرامپت به همه</label>
+          <select id="access-copy">
+            <option value="1">بله (پیش‌فرض)</option>
+            <option value="0">خیر — فقط واحدهای مجاز</option>
+          </select>
+        </div>
+        <div class="srow">
+          <label>نمایش تعداد پرامپت‌ها</label>
+          <select id="access-count">
+            <option value="1">نمایش داده شود</option>
+            <option value="0">پنهان شود</option>
+          </select>
+        </div>
+        <button class="sbtn sbtn-primary" onclick="saveAccess()">💾 ذخیره دسترسی‌ها</button>
+      </div>
+    </div>
+
+  </div><!-- /settingsMain -->
+</div><!-- /settings-drawer -->
+
+</body>
+</html>
